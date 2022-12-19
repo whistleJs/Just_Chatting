@@ -1,0 +1,10 @@
+{
+  "name": "Just_Chatting",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "packageManager": "yarn@3.3.0"
+}
