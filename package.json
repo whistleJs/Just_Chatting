@@ -1,10 +1,20 @@
 {
-  "name": "Just_Chatting",
+  "name": "just_chatting",
   "private": true,
   "workspaces": {
     "packages": [
       "packages/*"
     ]
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@3.3.0",
+  "devDependencies": {
+    "eslint": "^8.30.0",
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4"
+  },
+  "scripts": {
+    "workspace:client": "yarn workspace client",
+    "client:dev": "yarn workspace:client dev",
+    "test:all": "yarn workspace foreach --parallel run test"
+  }
 }
