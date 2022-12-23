@@ -14,7 +14,9 @@
   },
   "scripts": {
     "workspace:client": "yarn workspace client",
+    "workspace:server": "yarn workspace server",
     "client:dev": "yarn workspace:client dev",
+    "server:dev": "yarn workspace:server start:dev",
     "test:all": "yarn workspace foreach --parallel run test"
   }
 }
