@@ -2,32 +2,26 @@ import { Logger } from '@nestjs/common';
 import {
   WebSocketGateway,
   WebSocketServer,
-  OnGatewayInit,
   OnGatewayConnection,
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 
 @WebSocketGateway(8000, {
   transports: ['websocket'],
+  cors: '*',
 })
-export class SocketGateway
-  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
-{
+export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
   private logger: Logger = new Logger('Socket Gateway');
 
   @WebSocketServer()
   server: Server;
 
-  async handleConnection(client: any, ...args: any[]) {
-    console.log('[Socket] Connect');
+  async handleConnection(client: Socket) {
+    this.logger.debug(`Connect - ${client.id}`);
   }
 
-  async handleDisconnect(client: any) {
-    console.log('[Socket] Disconnect');
-  }
-
-  afterInit(server: Server) {
-    console.log('After Init');
+  async handleDisconnect(client: Socket) {
+    this.logger.debug(`Disconnect - ${client.id}`);
   }
 }
