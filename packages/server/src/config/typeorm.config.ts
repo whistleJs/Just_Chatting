@@ -1,8 +1,6 @@
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
-import Users from '@/model/entity/Users.entity';
-
 const options: TypeOrmModuleOptions = {
   type: 'mysql',
   host: 'localhost',
@@ -10,7 +8,7 @@ const options: TypeOrmModuleOptions = {
   username: 'root',
   password: '0000',
   database: 'just_chatting',
-  entities: [Users],
+  entities: [__dirname + '/../model/entity/*.entity.{ts,js}'],
   synchronize: true,
   autoLoadEntities: true,
   logging: true,
