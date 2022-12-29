@@ -4,7 +4,7 @@ import TypeOrmConfig from '@/config/typeorm.config';
 
 import SocketGateway from '@/gateway/socket.gateway';
 
-import UserModule from './user.module';
+import UserModule from '@/api/module/user.module';
 
 @Module({
   imports: [TypeOrmConfig, UserModule],

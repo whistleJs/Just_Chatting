@@ -11,6 +11,9 @@ class Users extends BaseEntity {
   email: string;
 
   @Column('varchar')
+  password: string;
+
+  @Column('varchar')
   name: string;
 }
 
