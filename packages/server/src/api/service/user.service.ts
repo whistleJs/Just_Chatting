@@ -13,4 +13,8 @@ export default class UserService {
   async getCount() {
     return this.userRepository.count();
   }
+
+  async findById(id: number) {
+    return await this.userRepository.findOne({ where: { id } });
+  }
 }
