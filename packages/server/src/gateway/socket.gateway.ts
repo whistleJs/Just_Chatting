@@ -11,7 +11,9 @@ import { Server, Socket } from 'socket.io';
   transports: ['websocket'],
   cors: '*',
 })
-export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
+export default class SocketGateway
+  implements OnGatewayConnection, OnGatewayDisconnect
+{
   private logger: Logger = new Logger('Socket Gateway');
 
   @WebSocketServer()
