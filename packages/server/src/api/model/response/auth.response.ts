@@ -4,6 +4,6 @@ export interface SignUpResponse {
   name: string;
 }
 
-export interface LoginResponse {
+export interface SignInResponse {
   accessToken: string;
 }

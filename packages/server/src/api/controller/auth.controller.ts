@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
 
 import AuthService from '@/api/service/auth.service';
-import { LoginRequest, SignUpRequest } from '@/api/model/request/auth.request';
+import { SignUpRequest, SignInRequest } from '@/api/model/request/auth.request';
 
 @Controller()
 export default class AuthController {
@@ -12,8 +12,8 @@ export default class AuthController {
     return this.authService.signUp(request);
   }
 
-  @Post('login')
-  login(@Body() request: LoginRequest) {
-    return this.authService.login(request);
+  @Post('sign-in')
+  signIn(@Body() request: SignInRequest) {
+    return this.authService.signIn(request);
   }
 }

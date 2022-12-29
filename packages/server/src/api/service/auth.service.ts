@@ -10,10 +10,10 @@ import { QueryFailedError } from 'typeorm';
 
 import UserRepository from '@/api/repository/user.repository';
 import Users from '@/api/model/entity/Users.entity';
-import { LoginRequest, SignUpRequest } from '@/api/model/request/auth.request';
+import { SignUpRequest, SignInRequest } from '@/api/model/request/auth.request';
 import {
-  LoginResponse,
   SignUpResponse,
+  SignInResponse,
 } from '@/api/model/response/auth.response';
 
 @Injectable()
@@ -55,7 +55,7 @@ export default class AuthService {
   /**
    * 로그인 절차
    */
-  async login({ email, password }: LoginRequest): Promise<LoginResponse> {
+  async signIn({ email, password }: SignInRequest): Promise<SignInResponse> {
     const user = await this.userRepository.findOne({ where: { email } });
 
     if (!user) {
