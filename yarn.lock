@@ -7376,6 +7376,7 @@ __metadata:
     ts-node: ^10.0.0
     tsconfig-paths: 4.1.0
     typeorm: ^0.3.11
+    typeorm-naming-strategies: ^4.1.0
     typescript: ^4.7.4
   languageName: unknown
   linkType: soft
@@ -8247,6 +8248,15 @@ __metadata:
   version: 0.0.6
   resolution: "typedarray@npm:0.0.6"
   checksum: 33b39f3d0e8463985eeaeeacc3cb2e28bc3dfaf2a5ed219628c0b629d5d7b810b0eb2165f9f607c34871d5daa92ba1dc69f49051cf7d578b4cbd26c340b9d1b1
+  languageName: node
+  linkType: hard
+
+"typeorm-naming-strategies@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "typeorm-naming-strategies@npm:4.1.0"
+  peerDependencies:
+    typeorm: ^0.2.0 || ^0.3.0
+  checksum: 9654f386915532b134e00d10fa50b75d2c63d462a4acafad8d67071548cb41447b67bc5029ea07afae043f504a3e76c0f7526fc16c40081a70ade2a862a92164
   languageName: node
   linkType: hard
 
