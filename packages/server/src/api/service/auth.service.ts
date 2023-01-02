@@ -56,10 +56,6 @@ export default class AuthService {
    * 로그인 절차
    */
   async signIn({ email, password }: SignInRequest): Promise<SignInResponse> {
-    if (email.trim() === '') {
-      throw new BadRequestException('REQUIRED_EMAIL');
-    }
-
     const user = await this.userRepository.findOne({ where: { email } });
 
     if (!user) {
