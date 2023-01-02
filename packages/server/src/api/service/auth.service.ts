@@ -33,7 +33,7 @@ export default class AuthService {
     if (
       await this.userRepository.findOne({ where: { email: request.email } })
     ) {
-      throw new BadRequestException('Already email exists.');
+      throw new BadRequestException('ALREADY_EMAIL');
     }
 
     // 비밀번호 암호화
@@ -56,14 +56,18 @@ export default class AuthService {
    * 로그인 절차
    */
   async signIn({ email, password }: SignInRequest): Promise<SignInResponse> {
+    if (email.trim() === '') {
+      throw new BadRequestException('REQUIRED_EMAIL');
+    }
+
     const user = await this.userRepository.findOne({ where: { email } });
 
     if (!user) {
-      throw new BadRequestException('Not found user.');
+      throw new BadRequestException('NOT_FOUND_USER');
     }
 
     if (!(await bcrypt.compare(password, user.password))) {
-      throw new BadRequestException('Incorrect password.');
+      throw new BadRequestException('INCORRECT_PASSWORD');
     }
 
     const accessToken = this.jwtService.sign({ email, sub: user.id });

@@ -21,7 +21,7 @@ export default class AuthMiddleware implements NestMiddleware {
     const { authorization } = request.headers;
 
     if (!authorization) {
-      throw new UnauthorizedException('Does not exists token.');
+      throw new UnauthorizedException('NOT_EXISTS_TOKEN');
     }
 
     const [, token] = authorization.split(' ');
@@ -32,17 +32,17 @@ export default class AuthMiddleware implements NestMiddleware {
         secret: 'secret',
       });
     } catch (e) {
-      throw new UnauthorizedException('Invalid Token');
+      throw new UnauthorizedException('INVALID_TOKEN');
     }
 
     if (!verifyToken) {
-      throw new UnauthorizedException('Invalid Token');
+      throw new UnauthorizedException('INVALID_TOKEN');
     }
 
     const user = await this.userService.findById(verifyToken.id);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid Token');
+      throw new UnauthorizedException('INVALID_TOKEN');
     }
 
     request.headers.user = user as any;
