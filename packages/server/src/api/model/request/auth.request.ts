@@ -1,13 +1,25 @@
-import { IsRequired } from '@/validator/common.validator';
+import { IsRequired, IsDataType } from '@/validator/common.validator';
 
 export class SignUpRequest {
+  @IsDataType('STRING')
+  @IsRequired
   email: string;
+
+  @IsDataType('STRING')
+  @IsRequired
   password: string;
+
+  @IsDataType('STRING')
+  @IsRequired
   name: string;
 }
 
 export class SignInRequest {
-  @IsRequired()
+  @IsDataType('STRING')
+  @IsRequired
   email: string;
+
+  @IsDataType('STRING')
+  @IsRequired
   password: string;
 }
