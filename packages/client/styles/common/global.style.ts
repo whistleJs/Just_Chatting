@@ -14,4 +14,11 @@ export const GlobalStyles = css`
     box-sizing: border-box;
     text-decoration: none;
   }
+
+  html,
+  body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
 `;

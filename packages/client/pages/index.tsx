@@ -1,3 +1,13 @@
+import { ContainerStyles } from "@/styles/page/index.style";
+
+import CommonButton from "@/components/common/common-button";
+
 export default () => {
-  return <>Main Page 하이</>;
+  return (
+    <ContainerStyles column alignItems="center" justifyContent="center">
+      <span>
+        <sup>Just</sup>Chatting
+      </span>
+    </ContainerStyles>
+  );
 };
