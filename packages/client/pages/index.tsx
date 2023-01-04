@@ -8,6 +8,8 @@ export default () => {
       <span>
         <sup>Just</sup>Chatting
       </span>
+
+      <CommonButton>로그인</CommonButton>
     </ContainerStyles>
   );
 };

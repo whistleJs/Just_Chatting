@@ -21,7 +21,7 @@ export const ContainerStyles = styled(CommonContainerStyles)`
   background-color: #5a27d5;
 
   & > span {
-    font-size: 56px;
+    font-size: 64px;
     color: white;
 
     & > sup {
