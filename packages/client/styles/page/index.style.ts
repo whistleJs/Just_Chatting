@@ -20,7 +20,7 @@ const BounceAnimation = keyframes`
 export const ContainerStyles = styled(CommonContainerStyles)`
   background-color: #5a27d5;
 
-  & > span {
+  & span.title {
     font-size: 64px;
     color: white;
 
@@ -29,5 +29,23 @@ export const ContainerStyles = styled(CommonContainerStyles)`
       font-size: 32px;
       animation: ${BounceAnimation} 1s infinite;
     }
+  }
+
+  & .form {
+    margin-top: 10px;
+  }
+
+  & .input-groups > div {
+    &:not(:first-of-type) {
+      margin-top: 16px;
+    }
+
+    & > .title {
+      color: white;
+    }
+  }
+
+  & .button-groups {
+    margin-top: 25px;
   }
 `;
