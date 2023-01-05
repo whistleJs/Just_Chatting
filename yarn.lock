@@ -3173,6 +3173,7 @@ __metadata:
     "@types/react-dom": 18.0.9
     eslint: 8.30.0
     eslint-config-next: 13.0.7
+    jotai: ^1.12.1
     next: 13.0.7
     react: 18.2.0
     react-dom: 18.2.0
@@ -5933,6 +5934,46 @@ __metadata:
   bin:
     jest: bin/jest.js
   checksum: b9dcb542eb7c16261c281cdc2bf37155dbb3f1205bae0b567f05051db362c85ddd4b765f126591efb88f6d298eb10336d0aa6c7d5373b4d53f918137a9a70182
+  languageName: node
+  linkType: hard
+
+"jotai@npm:^1.12.1":
+  version: 1.12.1
+  resolution: "jotai@npm:1.12.1"
+  peerDependencies:
+    "@babel/core": "*"
+    "@babel/template": "*"
+    jotai-immer: "*"
+    jotai-optics: "*"
+    jotai-redux: "*"
+    jotai-tanstack-query: "*"
+    jotai-urql: "*"
+    jotai-valtio: "*"
+    jotai-xstate: "*"
+    jotai-zustand: "*"
+    react: ">=16.8"
+  peerDependenciesMeta:
+    "@babel/core":
+      optional: true
+    "@babel/template":
+      optional: true
+    jotai-immer:
+      optional: true
+    jotai-optics:
+      optional: true
+    jotai-redux:
+      optional: true
+    jotai-tanstack-query:
+      optional: true
+    jotai-urql:
+      optional: true
+    jotai-valtio:
+      optional: true
+    jotai-xstate:
+      optional: true
+    jotai-zustand:
+      optional: true
+  checksum: 11375791c9719ae321227fc44c794c89951fc1c2585568f52f59c769cea6f699924fcd06c22e7c82006c485c738f057e47f2e1c9a3d4520b8dacf99cb4ee6d38
   languageName: node
   linkType: hard
 
