@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 import { ThemeColorType } from "@/styles/common/theme.style";
 
 /* Size */
@@ -18,4 +20,5 @@ export type CommonButtonSizeType = keyof CommonButtonSizeData;
 export type CommonButtonStyleProps = {
   color: ThemeColorType;
   size: CommonButtonSizeType;
+  style?: CSSProperties;
 };

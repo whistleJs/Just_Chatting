@@ -18,7 +18,7 @@ const BUTTON_SIZE: CommonButtonSizeData = {
 };
 
 export const CommonButtonStyles = styled.button<CommonButtonStyleProps>(
-  ({ theme, color, size }) => ({
+  ({ theme, color, size, style }) => ({
     padding: BUTTON_SIZE[size].padding,
     border: "none",
     borderRadius: "4px",
@@ -30,5 +30,6 @@ export const CommonButtonStyles = styled.button<CommonButtonStyleProps>(
       backgroundColor: theme.color[color].active,
       color: "white",
     },
+    ...(style || {}),
   })
 );
