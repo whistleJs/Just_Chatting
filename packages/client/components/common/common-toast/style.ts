@@ -12,5 +12,16 @@ export const CommonToastContainerStyles = styled.div`
 `;
 
 export const CommonToastStyles = styled(FlexStyles)<CommonToastStylesProp>(
-  ({ type }) => ({})
+  ({ type }) => ({
+    padding: "12px 16px",
+    minWidth: "250px",
+    backgroundColor: "white",
+    borderRadius: "8px",
+    "& > span.common-toast-title": {
+      fontSize: "20px",
+    },
+    "& > span.common-toast-text": {
+      fontSize: "16px",
+    },
+  })
 );

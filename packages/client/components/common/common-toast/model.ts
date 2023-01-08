@@ -4,5 +4,4 @@ export interface Toast {
   type: ToastType;
   title: string;
   text: string;
-  createdAt: number;
 }

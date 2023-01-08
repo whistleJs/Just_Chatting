@@ -1,34 +1,51 @@
-import { useAtom } from "jotai";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { toastAtom } from "@/store/toast.store";
+import useToast from "@/hooks/useToast";
 
+import { TOTAL_ANIMATE_TIMES } from "./constants";
 import { CommonToastContainerStyles, CommonToastStyles } from "./style";
+import { Toast } from "./model";
 
 export default () => {
-  const [toastList, setToastList] = useAtom(toastAtom);
-  const [frameInterval, setFrameInterval] = useState<number>();
+  const timeoutRef = useRef<NodeJS.Timeout>();
+  const [activeToast, setActiveToast] = useState<Toast | null>(null);
+  const { toastList, removeToast } = useToast();
 
   // Handler
-  const handlerRequestAnimationFrame = () => {};
+  const handlerTimeout = () => {
+    setActiveToast(null);
+    removeToast();
+  };
 
   // Hooks
   useEffect(() => {
-    setFrameInterval((savedInterval) => {
-      return savedInterval
-        ? undefined
-        : requestAnimationFrame(handlerRequestAnimationFrame);
-    });
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
+
+  useEffect(() => {
+    if (activeToast) {
+      timeoutRef.current = setTimeout(handlerTimeout, TOTAL_ANIMATE_TIMES);
+    }
+  }, [activeToast]);
+
+  useEffect(() => {
+    if (!activeToast) {
+      setActiveToast(toastList[0]);
+    }
+  }, [toastList]);
 
   return (
     <CommonToastContainerStyles>
-      {toastList.map((toast) => (
-        <CommonToastStyles type={toast.type}>
-          <span className="title">{toast.title}</span>
-          <span className="text">{toast.text}</span>
+      {activeToast && (
+        <CommonToastStyles column type={activeToast.type}>
+          <span className="common-toast-title">{activeToast.title}</span>
+          <span className="common-toast-text">{activeToast.text}</span>
         </CommonToastStyles>
-      ))}
+      )}
     </CommonToastContainerStyles>
   );
 };
