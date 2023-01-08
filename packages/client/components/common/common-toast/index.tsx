@@ -42,8 +42,12 @@ export default () => {
     <CommonToastContainerStyles>
       {activeToast && (
         <CommonToastStyles column type={activeToast.type}>
-          <span className="common-toast-title">{activeToast.title}</span>
+          <span className="common-toast-title">{activeToast.type}</span>
           <span className="common-toast-text">{activeToast.text}</span>
+
+          <div className="common-toast-timer">
+            <div />
+          </div>
         </CommonToastStyles>
       )}
     </CommonToastContainerStyles>
