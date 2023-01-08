@@ -1,12 +1,18 @@
 import "@emotion/react";
 
 declare module "@emotion/react" {
+  export interface ThemeColorDetail {
+    disabled: string;
+    default: string;
+    active: string;
+  }
+
   export interface ThemeColor {
-    main: {
-      disabled: string;
-      default: string;
-      active: string;
-    };
+    main: ThemeColorDetail;
+    red: ThemeColorDetail;
+    orange: ThemeColorDetail;
+    green: ThemeColorDetail;
+    blue: ThemeColorDetail;
   }
 
   export interface Theme {
