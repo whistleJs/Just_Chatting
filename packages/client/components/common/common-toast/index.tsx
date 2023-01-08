@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import useToast from "@/hooks/useToast";
+import useToast from "@/core/hooks/useToast";
 
 import { TOTAL_ANIMATE_TIMES } from "./constants";
 import { CommonToastContainerStyles, CommonToastStyles } from "./style";

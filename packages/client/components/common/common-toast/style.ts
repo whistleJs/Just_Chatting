@@ -6,7 +6,7 @@ import { FADE_IN_TIMES, SHOW_TIMES, TOTAL_ANIMATE_TIMES } from "./constants";
 import { CommonToastStylesProp } from "./style.model";
 
 import { FlexStyles } from "@/styles/common/flex.style";
-import { getColorByStatus } from "@/core/style.util";
+import { getColorByStatus } from "@/core/utils/style.util";
 
 const ToastAnimation = keyframes`
   0% {
