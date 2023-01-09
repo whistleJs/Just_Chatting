@@ -29,6 +29,7 @@ export const GlobalStyles = css`
   body {
     width: 100vw;
     height: 100vh;
+    background-color: ${ThemeColors.main.default};
     overflow: hidden;
   }
 
