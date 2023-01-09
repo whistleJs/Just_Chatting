@@ -13,7 +13,7 @@ export const ThemeColors: ThemeColor = {
   },
   orange: {
     disabled: "",
-    default: "#ef8a17",
+    default: "#f7ad63",
     active: "",
   },
   green: {
