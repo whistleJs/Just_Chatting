@@ -1,31 +1,24 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 import CommonButton from "@/components/common-button";
-import CommonInput from "@/components/common/common-input";
+import CommonInput from "@/components/common-input";
 
 import SignLayout from "@/layouts/sign";
 
 import { FlexStyles } from "@/styles/common/flex.style";
 
 export default () => {
-  const router = useRouter();
-
-  const handlerClickSignUpButton = () => {
-    router.push("/sign-up");
-  };
-
   return (
     <SignLayout>
       <FlexStyles column className="form">
         <FlexStyles column className="input-groups">
-          <CommonInput title="아이디" placeholder="ID" />
+          <CommonInput title="아이디" placeholder="ID" value={""} onChange={() => {}} />
 
-          <CommonInput type="password" title="비밀번호" placeholder="Password" />
+          <CommonInput type="password" title="비밀번호" placeholder="Password" value={""} onChange={() => {}} />
         </FlexStyles>
 
         <FlexStyles className="button-groups">
-          <CommonButton>로그인</CommonButton>
+          <CommonButton onClick={() => {}}>로그인</CommonButton>
         </FlexStyles>
       </FlexStyles>
 

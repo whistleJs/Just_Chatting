@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import CommonButton from "@/components/common-button";
-import CommonInput from "@/components/common/common-input";
+import CommonInput from "@/components/common-input";
 
 import {
   EMAIL_ERROR_CODE,
