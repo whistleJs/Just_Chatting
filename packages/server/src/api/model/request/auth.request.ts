@@ -12,6 +12,10 @@ export class SignUpRequest {
   @IsDataType('STRING')
   @IsRequired
   name: string;
+
+  @IsDataType('STRING')
+  @IsRequired
+  nickname: string;
 }
 
 export class SignInRequest {

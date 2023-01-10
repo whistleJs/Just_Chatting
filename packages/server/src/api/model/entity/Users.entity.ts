@@ -15,6 +15,9 @@ class Users extends BaseEntity {
 
   @Column('varchar')
   name: string;
+
+  @Column('varchar', { unique: true })
+  nickname: string;
 }
 
 export default Users;

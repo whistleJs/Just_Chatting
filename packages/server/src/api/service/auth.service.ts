@@ -36,6 +36,15 @@ export default class AuthService {
       throw new BadRequestException('ALREADY_EMAIL');
     }
 
+    // 닉네임 중복 체크
+    if (
+      await this.userRepository.findOne({
+        where: { nickname: request.nickname },
+      })
+    ) {
+      throw new BadRequestException('ALREADY_NICKNAME');
+    }
+
     // 비밀번호 암호화
     request.password = await bcrypt.hash(request.password, 8);
 
@@ -49,7 +58,12 @@ export default class AuthService {
       }
     }
 
-    return { id: user.id, email: user.email, name: user.name };
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      nickname: user.nickname,
+    };
   }
 
   /**
