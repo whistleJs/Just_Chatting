@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import CommonButton from "@/components/common/common-button";
+import CommonButton from "@/components/common-button";
 import CommonInput from "@/components/common/common-input";
 
 import {
@@ -20,11 +20,13 @@ import {
   PASSWORD_ERROR_MESSAGE,
   PASSWORD_REGEX,
 } from "@/core/constants/account.constants";
+import useToast from "@/core/hooks/useToast";
 import useValidate from "@/core/hooks/useValidate";
 
 import SignLayout from "@/layouts/sign";
 
 import { FlexStyles } from "@/styles/common/flex.style";
+import axios from "@/core/utils/axios.util";
 
 export default () => {
   const [nameErrorCode, setNameErrorCode] = useState<NAME_ERROR_CODE | null>(null);
@@ -38,6 +40,8 @@ export default () => {
   const [email, isInvalidEmail, setEmail] = useValidate(EMAIL_REGEX);
   const [password, isInvalidPassword, setPassword] = useValidate(PASSWORD_REGEX);
   const [passwordConfirm, isInvalidPasswordConfirm, setPasswordConfirm] = useValidate(PASSWORD_REGEX);
+
+  const { createToast } = useToast();
 
   const validate = () => {
     let isValidate = true;
@@ -83,10 +87,15 @@ export default () => {
     return isValidate;
   };
 
-  const handlerSignUp = () => {
+  const handlerSignUp = async () => {
+    axios;
     if (!validate()) return;
 
-    console.log("Validate Success");
+    try {
+      // console.log(await axios.post("/api/auth/sign-up"));
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (

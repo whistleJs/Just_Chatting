@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import CommonButton from "@/components/common/common-button";
+import CommonButton from "@/components/common-button";
 import CommonInput from "@/components/common/common-input";
 
 import SignLayout from "@/layouts/sign";
@@ -21,11 +21,7 @@ export default () => {
         <FlexStyles column className="input-groups">
           <CommonInput title="아이디" placeholder="ID" />
 
-          <CommonInput
-            type="password"
-            title="비밀번호"
-            placeholder="Password"
-          />
+          <CommonInput type="password" title="비밀번호" placeholder="Password" />
         </FlexStyles>
 
         <FlexStyles className="button-groups">
