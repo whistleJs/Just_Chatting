@@ -7,11 +7,11 @@ type CommonInputProps = {
   title?: JSX.Element | string;
   text?: JSX.Element | string | null;
   placeholder?: string;
-  value?: string | string[] | number;
+  value: string | string[] | number;
 
   isError?: boolean;
 
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
 };

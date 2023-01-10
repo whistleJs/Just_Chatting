@@ -10,18 +10,11 @@ type CommonButtonProps = {
   size?: CommonButtonSizeType;
   style?: CSSProperties;
 
-  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLButtonElement>) => void;
 };
 
-export default ({
-  children,
-  color,
-  size,
-  style,
-  onClick,
-  onKeyDown,
-}: CommonButtonProps) => {
+export default ({ children, color, size, style, onClick, onKeyDown }: CommonButtonProps) => {
   return (
     <CommonButtonStyles
       color={color || "main"}
