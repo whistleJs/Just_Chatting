@@ -17,15 +17,12 @@ import {
   NICKNAME_ERROR_CODE,
   NICKNAME_ERROR_MESSAGE,
   NICKNAME_REGEX,
-  PASSWORD_CONFIRM_ERROR_CODE,
-  PASSWORD_CONFIRM_ERROR_MESSAGE,
   PASSWORD_ERROR_CODE,
   PASSWORD_ERROR_MESSAGE,
   PASSWORD_REGEX,
 } from "@/core/constants/account.constants";
 import useToast from "@/core/hooks/useToast";
 import useValidate from "@/core/hooks/useValidate";
-import { AxiosErrorResponseData } from "@/core/model/axios.model";
 
 import SignLayout from "@/layouts/sign";
 
@@ -38,7 +35,7 @@ export default () => {
   const [emailErrorCode, setEmailErrorCode] = useState<EMAIL_ERROR_CODE | null>(null);
   const [nicknameErrorCode, setNicknameErrorCode] = useState<NICKNAME_ERROR_CODE | null>(null);
   const [passwordErrorCode, setPasswordErrorCode] = useState<PASSWORD_ERROR_CODE | null>(null);
-  const [passwordConfirmErrorCode, setPasswordConfirmErrorCode] = useState<PASSWORD_CONFIRM_ERROR_CODE | null>(null);
+  const [passwordConfirmErrorCode, setPasswordConfirmErrorCode] = useState<PASSWORD_ERROR_CODE | null>(null);
   const [nameErrorCode, setNameErrorCode] = useState<NAME_ERROR_CODE | null>(null);
 
   const [email, isInvalidEmail, setEmail] = useValidate(EMAIL_REGEX);
@@ -100,7 +97,7 @@ export default () => {
       await AuthService.signUp({ name, password, nickname, email });
     } catch (error) {
       if (typeof error === "string") {
-        switch (error) {
+        switch (error as TOAST_MESSAGE_TYPE) {
           case "ALREADY_EMAIL":
             setEmailErrorCode("DUPLICATE");
             break;
@@ -127,7 +124,7 @@ export default () => {
         <FlexStyles column className="input-groups">
           <CommonInput
             title="이메일"
-            placeholder="Email"
+            placeholder="example@example.com"
             value={email}
             text={emailErrorCode && EMAIL_ERROR_MESSAGE[emailErrorCode]}
             isError={emailErrorCode !== null}
@@ -161,7 +158,7 @@ export default () => {
             title="비밀번호 확인"
             placeholder="Password Confirm"
             value={passwordConfirm}
-            text={passwordConfirmErrorCode && PASSWORD_CONFIRM_ERROR_MESSAGE[passwordConfirmErrorCode]}
+            text={passwordConfirmErrorCode && PASSWORD_ERROR_MESSAGE[passwordConfirmErrorCode]}
             isError={passwordConfirmErrorCode !== null}
             onChange={(e) => setPasswordConfirm(e.target.value)}
             onEnter={handlerSignUp}

@@ -17,9 +17,6 @@ export const EMAIL_ERROR_MESSAGE = {
 };
 export const PASSWORD_ERROR_MESSAGE = {
   INVALID: "비밀번호 형식이 유효하지 않습니다.",
-};
-export const PASSWORD_CONFIRM_ERROR_MESSAGE = {
-  INVALID: "비밀번호 형식이 유효하지 않습니다.",
   INCORRECT: "비밀번호가 일치하지 않습니다.",
 };
 
@@ -27,4 +24,3 @@ export type NAME_ERROR_CODE = keyof typeof NAME_ERROR_MESSAGE;
 export type NICKNAME_ERROR_CODE = keyof typeof NICKNAME_ERROR_MESSAGE;
 export type EMAIL_ERROR_CODE = keyof typeof EMAIL_ERROR_MESSAGE;
 export type PASSWORD_ERROR_CODE = keyof typeof PASSWORD_ERROR_MESSAGE;
-export type PASSWORD_CONFIRM_ERROR_CODE = keyof typeof PASSWORD_CONFIRM_ERROR_MESSAGE;
