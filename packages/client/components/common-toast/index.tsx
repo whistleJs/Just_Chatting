@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import useToast from "@/core/hooks/useToast";
 
-import { TOAST_MESSAGES, TOTAL_ANIMATE_TIMES } from "./constants";
+import { TOAST_MESSAGES, TOTAL_ANIMATE_TIMES } from "@/core/constants/toast.constants";
 import { CommonToastContainerStyles, CommonToastStyles } from "./style";
 import { Toast } from "./model";
 
@@ -34,7 +34,7 @@ export default () => {
 
   useEffect(() => {
     if (!activeToast) {
-      setActiveToast(toastList[0]);
+      setActiveToast(TOAST_MESSAGES[toastList[0]]);
     }
   }, [toastList]);
 
@@ -43,7 +43,7 @@ export default () => {
       {activeToast && (
         <CommonToastStyles column type={activeToast.type}>
           <span className="common-toast-title">{activeToast.type}</span>
-          <span className="common-toast-text">{TOAST_MESSAGES[activeToast.message]}</span>
+          <span className="common-toast-text">{activeToast.message}</span>
 
           <div className="common-toast-timer">
             <div />

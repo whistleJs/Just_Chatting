@@ -1,5 +1,5 @@
 import { atom } from "jotai";
 
-import { Toast } from "@/components/common/common-toast/model";
+import { TOAST_MESSAGE_TYPE } from "@/components/common-toast/model";
 
-export const toastAtom = atom<Toast[]>([]);
+export const toastAtom = atom<TOAST_MESSAGE_TYPE[]>([]);
