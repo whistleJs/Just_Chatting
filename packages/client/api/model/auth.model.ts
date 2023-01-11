@@ -4,3 +4,8 @@ export interface AuthSignUpRequest {
   password: string;
   name: string;
 }
+
+export interface AuthSignInRequest {
+  email: string;
+  password: string;
+}

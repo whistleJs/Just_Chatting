@@ -13,6 +13,7 @@ export const NICKNAME_ERROR_MESSAGE = {
 export const EMAIL_ERROR_MESSAGE = {
   INVALID: "이메일 형식이 유효하지 않습니다.",
   DUPLICATE: "이미 존재하는 이메일입니다.",
+  NOT_FOUND: "존재하지 않는 이메일입니다.",
 };
 export const PASSWORD_ERROR_MESSAGE = {
   INVALID: "비밀번호 형식이 유효하지 않습니다.",
