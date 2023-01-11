@@ -15,4 +15,12 @@ export const TOAST_MESSAGES: ToastMessageData = {
     type: "SUCCESS",
     message: "성공적으로 회원가입 되었습니다.",
   },
+  ALREADY_EMAIL: {
+    type: "ERROR",
+    message: "이미 존재하는 이메일입니다.",
+  },
+  ALREADY_NICKNAME: {
+    type: "ERROR",
+    message: "이미 존재하는 닉네임입니다.",
+  },
 };

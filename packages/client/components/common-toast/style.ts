@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 
-import { FADE_IN_TIMES, SHOW_TIMES, TOTAL_ANIMATE_TIMES } from "./constants";
+import { FADE_IN_TIMES, SHOW_TIMES, TOTAL_ANIMATE_TIMES } from "@/core/constants/toast.constants";
 
 import { CommonToastStylesProp } from "./style.model";
 
@@ -47,36 +47,34 @@ export const CommonToastContainerStyles = styled.div`
   z-index: 99999;
 `;
 
-export const CommonToastStyles = styled(FlexStyles)<CommonToastStylesProp>(
-  ({ type }) => ({
-    position: "relative",
-    padding: "16px 20px 24px",
-    width: "250px",
-    backgroundColor: "white",
-    borderRadius: "8px",
-    boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.16)",
-    overflow: "hidden",
-    animation: `${ToastAnimation} ${TOTAL_ANIMATE_TIMES}ms`,
-    "& > span.common-toast-title": {
-      fontSize: "18px",
-    },
-    "& > span.common-toast-text": {
-      marginTop: "4px",
-      fontSize: "16px",
-    },
-    "& > .common-toast-timer": {
-      position: "absolute",
-      left: "0",
-      bottom: "0",
-      width: "100%",
-      height: "6px",
-      backgroundColor: "rgba(0, 0, 0, 0.1)",
+export const CommonToastStyles = styled(FlexStyles)<CommonToastStylesProp>(({ type }) => ({
+  position: "relative",
+  padding: "16px 20px 24px",
+  width: "250px",
+  backgroundColor: "white",
+  borderRadius: "8px",
+  boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.16)",
+  overflow: "hidden",
+  animation: `${ToastAnimation} ${TOTAL_ANIMATE_TIMES}ms`,
+  "& > span.common-toast-title": {
+    fontSize: "18px",
+  },
+  "& > span.common-toast-text": {
+    marginTop: "4px",
+    fontSize: "16px",
+  },
+  "& > .common-toast-timer": {
+    position: "absolute",
+    left: "0",
+    bottom: "0",
+    width: "100%",
+    height: "6px",
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
 
-      "& > div": {
-        height: "100%",
-        backgroundColor: getColorByStatus(type),
-        animation: `${ToastTimerAnimation} ${SHOW_TIMES}ms linear forwards`,
-      },
+    "& > div": {
+      height: "100%",
+      backgroundColor: getColorByStatus(type),
+      animation: `${ToastTimerAnimation} ${SHOW_TIMES}ms linear forwards`,
     },
-  })
-);
+  },
+}));

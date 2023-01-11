@@ -1,5 +1,8 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
+
+import AuthService from "@/api/AuthService";
 
 import CommonButton from "@/components/common-button";
 import CommonInput from "@/components/common-input";
@@ -22,35 +25,38 @@ import {
 } from "@/core/constants/account.constants";
 import useToast from "@/core/hooks/useToast";
 import useValidate from "@/core/hooks/useValidate";
+import { AxiosErrorResponseData } from "@/core/model/axios.model";
 
 import SignLayout from "@/layouts/sign";
 
 import { FlexStyles } from "@/styles/common/flex.style";
-import axios from "@/core/utils/axios.util";
+import { TOAST_MESSAGE_TYPE } from "@/components/common-toast/model";
 
 export default () => {
-  const [nameErrorCode, setNameErrorCode] = useState<NAME_ERROR_CODE | null>(null);
-  const [nicknameErrorCode, setNicknameErrorCode] = useState<NICKNAME_ERROR_CODE | null>(null);
+  const router = useRouter();
+
   const [emailErrorCode, setEmailErrorCode] = useState<EMAIL_ERROR_CODE | null>(null);
+  const [nicknameErrorCode, setNicknameErrorCode] = useState<NICKNAME_ERROR_CODE | null>(null);
   const [passwordErrorCode, setPasswordErrorCode] = useState<PASSWORD_ERROR_CODE | null>(null);
   const [passwordConfirmErrorCode, setPasswordConfirmErrorCode] = useState<PASSWORD_CONFIRM_ERROR_CODE | null>(null);
+  const [nameErrorCode, setNameErrorCode] = useState<NAME_ERROR_CODE | null>(null);
 
-  const [name, isInvalidName, setName] = useValidate(NAME_REGEX);
-  const [nickname, isInvalidNickname, setNickname] = useValidate(NICKNAME_REGEX);
   const [email, isInvalidEmail, setEmail] = useValidate(EMAIL_REGEX);
+  const [nickname, isInvalidNickname, setNickname] = useValidate(NICKNAME_REGEX);
   const [password, isInvalidPassword, setPassword] = useValidate(PASSWORD_REGEX);
   const [passwordConfirm, isInvalidPasswordConfirm, setPasswordConfirm] = useValidate(PASSWORD_REGEX);
+  const [name, isInvalidName, setName] = useValidate(NAME_REGEX);
 
   const { createToast } = useToast();
 
   const validate = () => {
     let isValidate = true;
 
-    if (isInvalidName) {
-      setNameErrorCode("INVALID");
+    if (isInvalidEmail) {
+      setEmailErrorCode("INVALID");
       isValidate = false;
     } else {
-      setNameErrorCode(null);
+      setEmailErrorCode(null);
     }
 
     if (isInvalidNickname) {
@@ -58,13 +64,6 @@ export default () => {
       isValidate = false;
     } else {
       setNicknameErrorCode(null);
-    }
-
-    if (isInvalidEmail) {
-      setEmailErrorCode("INVALID");
-      isValidate = false;
-    } else {
-      setEmailErrorCode(null);
     }
 
     if (isInvalidPassword) {
@@ -84,18 +83,42 @@ export default () => {
       setPasswordConfirmErrorCode(null);
     }
 
+    if (isInvalidName) {
+      setNameErrorCode("INVALID");
+      isValidate = false;
+    } else {
+      setNameErrorCode(null);
+    }
+
     return isValidate;
   };
 
   const handlerSignUp = async () => {
-    axios;
     if (!validate()) return;
 
     try {
-      // console.log(await axios.post("/api/auth/sign-up"));
-    } catch (e) {
-      console.error(e);
+      await AuthService.signUp({ name, password, nickname, email });
+    } catch (error) {
+      if (typeof error === "string") {
+        switch (error) {
+          case "ALREADY_EMAIL":
+            setEmailErrorCode("DUPLICATE");
+            break;
+          case "ALREADY_NICKNAME":
+            setNicknameErrorCode("DUPLICATE");
+            break;
+          default:
+            createToast(error as TOAST_MESSAGE_TYPE);
+            break;
+        }
+      }
+
+      return;
     }
+
+    router.push("/sign-in");
+
+    createToast("SUCCESS_SIGN_UP");
   };
 
   return (
@@ -103,12 +126,12 @@ export default () => {
       <FlexStyles column className="form">
         <FlexStyles column className="input-groups">
           <CommonInput
-            title="이름"
-            placeholder="Name"
-            value={name}
-            text={nameErrorCode && NAME_ERROR_MESSAGE[nameErrorCode]}
-            isError={nameErrorCode !== null}
-            onChange={(e) => setName(e.target.value)}
+            title="이메일"
+            placeholder="Email"
+            value={email}
+            text={emailErrorCode && EMAIL_ERROR_MESSAGE[emailErrorCode]}
+            isError={emailErrorCode !== null}
+            onChange={(e) => setEmail(e.target.value)}
             onEnter={handlerSignUp}
           />
 
@@ -119,16 +142,6 @@ export default () => {
             text={nicknameErrorCode && NICKNAME_ERROR_MESSAGE[nicknameErrorCode]}
             isError={nicknameErrorCode !== null}
             onChange={(e) => setNickname(e.target.value)}
-            onEnter={handlerSignUp}
-          />
-
-          <CommonInput
-            title="이메일"
-            placeholder="Email"
-            value={email}
-            text={emailErrorCode && EMAIL_ERROR_MESSAGE[emailErrorCode]}
-            isError={emailErrorCode !== null}
-            onChange={(e) => setEmail(e.target.value)}
             onEnter={handlerSignUp}
           />
 
@@ -151,6 +164,16 @@ export default () => {
             text={passwordConfirmErrorCode && PASSWORD_CONFIRM_ERROR_MESSAGE[passwordConfirmErrorCode]}
             isError={passwordConfirmErrorCode !== null}
             onChange={(e) => setPasswordConfirm(e.target.value)}
+            onEnter={handlerSignUp}
+          />
+
+          <CommonInput
+            title="이름"
+            placeholder="Name"
+            value={name}
+            text={nameErrorCode && NAME_ERROR_MESSAGE[nameErrorCode]}
+            isError={nameErrorCode !== null}
+            onChange={(e) => setName(e.target.value)}
             onEnter={handlerSignUp}
           />
         </FlexStyles>
