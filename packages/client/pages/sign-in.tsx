@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import AuthService from "@/api/AuthService";
 
-import CommonButton from "@/components/common-button";
+import Button from "@/components/Button";
 import CommonInput from "@/components/common-input";
 import { TOAST_MESSAGE_TYPE } from "@/components/common-toast/model";
 
@@ -104,7 +104,7 @@ export default () => {
         </FlexStyles>
 
         <FlexStyles className="button-groups">
-          <CommonButton onClick={handlerSignIn}>로그인</CommonButton>
+          <Button onClick={handlerSignIn}>로그인</Button>
         </FlexStyles>
       </FlexStyles>
 

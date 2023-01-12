@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import AuthService from "@/api/AuthService";
 
-import CommonButton from "@/components/common-button";
+import Button from "@/components/Button";
 import CommonInput from "@/components/common-input";
 
 import {
@@ -176,7 +176,7 @@ export default () => {
         </FlexStyles>
 
         <FlexStyles className="button-groups">
-          <CommonButton onClick={handlerSignUp}>회원가입</CommonButton>
+          <Button onClick={handlerSignUp}>회원가입</Button>
         </FlexStyles>
       </FlexStyles>
 
