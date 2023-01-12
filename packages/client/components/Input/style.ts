@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 
 import { FlexStyles } from "@/styles/common/flex.style";
 
-import { CommonInputStylesProps } from "./style.model";
+import { InputStylesProps } from "./style.model";
 
-export const CommonInputStyles = styled(FlexStyles)<CommonInputStylesProps>(({ theme, isError }) => ({
+export const InputStyles = styled(FlexStyles)<InputStylesProps>(({ theme, isError }) => ({
   width: "100%",
 
   "& > .title": {

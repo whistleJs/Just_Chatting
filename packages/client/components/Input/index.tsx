@@ -1,8 +1,8 @@
 import { ChangeEvent, HTMLInputTypeAttribute, KeyboardEvent } from "react";
 
-import { CommonInputStyles } from "./style";
+import { InputStyles } from "./style";
 
-type CommonInputProps = {
+interface InputProps {
   type?: HTMLInputTypeAttribute;
   title?: JSX.Element | string;
   text?: JSX.Element | string | null;
@@ -14,9 +14,9 @@ type CommonInputProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onEnter?: (e: KeyboardEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
-};
+}
 
-export default ({ type, title, text, placeholder, value, isError, onChange, onKeyDown, onEnter }: CommonInputProps) => {
+const Input = ({ type, title, text, placeholder, value, isError, onChange, onKeyDown, onEnter }: InputProps) => {
   const handlerKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && onEnter) {
       onEnter(e);
@@ -28,7 +28,7 @@ export default ({ type, title, text, placeholder, value, isError, onChange, onKe
   };
 
   return (
-    <CommonInputStyles column isError={isError || false}>
+    <InputStyles column isError={isError || false}>
       {title && <div className="title">{title}</div>}
 
       <input
@@ -40,6 +40,8 @@ export default ({ type, title, text, placeholder, value, isError, onChange, onKe
       />
 
       {text && <div className="text">{text}</div>}
-    </CommonInputStyles>
+    </InputStyles>
   );
 };
+
+export default Input;
