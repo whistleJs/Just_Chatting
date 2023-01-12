@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 
-import { TOAST_MESSAGE_TYPE } from "@/components/common-toast/model";
+import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 
 import { toastAtom } from "@/store/toast.store";
 

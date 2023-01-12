@@ -4,8 +4,8 @@ import { useState } from "react";
 import AuthService from "@/api/AuthService";
 
 import Button from "@/components/Button";
-import CommonInput from "@/components/common-input";
-import { TOAST_MESSAGE_TYPE } from "@/components/common-toast/model";
+import Input from "@/components/Input";
+import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 
 import {
   EMAIL_ERROR_CODE,
@@ -81,7 +81,7 @@ export default () => {
     <SignLayout>
       <FlexStyles column className="form">
         <FlexStyles column className="input-groups">
-          <CommonInput
+          <Input
             title="이메일"
             placeholder="example@example.com"
             value={email}
@@ -91,7 +91,7 @@ export default () => {
             onEnter={handlerSignIn}
           />
 
-          <CommonInput
+          <Input
             type="password"
             title="비밀번호"
             placeholder="Password"

@@ -1,25 +1,31 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 
-import { FADE_IN_TIMES, SHOW_TIMES, TOTAL_ANIMATE_TIMES } from "@/core/constants/toast.constants";
+import { getColorByStatus } from "@/core/utils/style.util";
+
+import { FlexStyles } from "@/styles/common/flex.style";
 
 import { CommonToastStylesProp } from "./style.model";
 
-import { FlexStyles } from "@/styles/common/flex.style";
-import { getColorByStatus } from "@/core/utils/style.util";
+// Static Variable
+export const FADE_TIMES = 0.5 * 1000;
+export const SHOW_TIMES = 5 * 1000;
 
+export const TOTAL_ANIMATE_TIMES = FADE_TIMES * 2 + SHOW_TIMES;
+
+// Styles
 const ToastAnimation = keyframes`
   0% {
     transform: translateY(50px);
     opacity: 0;
   }
 
-  ${(FADE_IN_TIMES / TOTAL_ANIMATE_TIMES) * 100 + "%"} {
+  ${(FADE_TIMES / TOTAL_ANIMATE_TIMES) * 100 + "%"} {
     transform: translateY(0px);
     opacity: 1;
   }
 
-  ${((FADE_IN_TIMES + SHOW_TIMES) / TOTAL_ANIMATE_TIMES) * 100 + "%"} {
+  ${((FADE_TIMES + SHOW_TIMES) / TOTAL_ANIMATE_TIMES) * 100 + "%"} {
     transform: translateY(0px);
     opacity: 1;
   }

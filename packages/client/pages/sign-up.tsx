@@ -5,7 +5,7 @@ import { useState } from "react";
 import AuthService from "@/api/AuthService";
 
 import Button from "@/components/Button";
-import CommonInput from "@/components/common-input";
+import Input from "@/components/Input";
 
 import {
   EMAIL_ERROR_CODE,
@@ -27,7 +27,7 @@ import useValidate from "@/core/hooks/useValidate";
 import SignLayout from "@/layouts/sign";
 
 import { FlexStyles } from "@/styles/common/flex.style";
-import { TOAST_MESSAGE_TYPE } from "@/components/common-toast/model";
+import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 
 export default () => {
   const router = useRouter();
@@ -122,7 +122,7 @@ export default () => {
     <SignLayout>
       <FlexStyles column className="form">
         <FlexStyles column className="input-groups">
-          <CommonInput
+          <Input
             title="이메일"
             placeholder="example@example.com"
             value={email}
@@ -132,7 +132,7 @@ export default () => {
             onEnter={handlerSignUp}
           />
 
-          <CommonInput
+          <Input
             title="닉네임"
             placeholder="Nickname"
             value={nickname}
@@ -142,7 +142,7 @@ export default () => {
             onEnter={handlerSignUp}
           />
 
-          <CommonInput
+          <Input
             type="password"
             title="비밀번호"
             placeholder="Password"
@@ -153,7 +153,7 @@ export default () => {
             onEnter={handlerSignUp}
           />
 
-          <CommonInput
+          <Input
             type="password"
             title="비밀번호 확인"
             placeholder="Password Confirm"
@@ -164,7 +164,7 @@ export default () => {
             onEnter={handlerSignUp}
           />
 
-          <CommonInput
+          <Input
             title="이름"
             placeholder="Name"
             value={name}

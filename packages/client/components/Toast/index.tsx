@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 
+import { TOAST_MESSAGES } from "@/core/constants/toast.constants";
 import useToast from "@/core/hooks/useToast";
 
-import { TOAST_MESSAGES, TOTAL_ANIMATE_TIMES } from "@/core/constants/toast.constants";
-import { CommonToastContainerStyles, CommonToastStyles } from "./style";
+import { CommonToastContainerStyles, CommonToastStyles, TOTAL_ANIMATE_TIMES } from "./style";
 import { Toast } from "./model";
 
-export default () => {
+const Toast = () => {
   const timeoutRef = useRef<NodeJS.Timeout>();
-  const [activeToast, setActiveToast] = useState<Toast | null>(null);
+  const [activeToast, setActiveToast] = useState<Toast>();
   const { toastList, removeToast } = useToast();
 
   // Handler
   const handlerTimeout = () => {
-    setActiveToast(null);
+    setActiveToast(undefined);
     removeToast();
   };
 
@@ -53,3 +53,5 @@ export default () => {
     </CommonToastContainerStyles>
   );
 };
+
+export default Toast;

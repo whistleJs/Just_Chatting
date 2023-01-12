@@ -1,4 +1,4 @@
-import { TOAST_MESSAGE_TYPE } from "@/components/common-toast/model";
+import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 
 export interface AxiosErrorResponseData {
   error: string;
