@@ -3,7 +3,7 @@ import { keyframes } from "@emotion/react";
 
 import { getColorByStatus } from "@/core/utils/style.util";
 
-import { FlexStyles } from "@/styles/common/flex.style";
+import { Flex } from "@/styles/common/flex.style";
 
 import { CommonToastStylesProp } from "./style.model";
 
@@ -53,7 +53,7 @@ export const CommonToastContainerStyles = styled.div`
   z-index: 99999;
 `;
 
-export const CommonToastStyles = styled(FlexStyles)<CommonToastStylesProp>(({ type }) => ({
+export const CommonToastStyles = styled(Flex)<CommonToastStylesProp>(({ type }) => ({
   position: "relative",
   padding: "16px 20px 24px",
   width: "250px",

@@ -1,24 +1,22 @@
-import { FlexStyles } from "@/styles/common/flex.style";
+import { Flex } from "@/styles/common/flex.style";
 import { SignLayoutContainerStyles } from "@/styles/layouts/sign.style";
 
 interface SignLayoutProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export default ({ children }: SignLayoutProps) => {
+const SignLayout = ({ children }: SignLayoutProps) => {
   return (
-    <SignLayoutContainerStyles
-      column
-      alignItems="center"
-      justifyContent="center"
-    >
-      <FlexStyles column>
+    <SignLayoutContainerStyles column alignItems="center" justifyContent="center">
+      <Flex column>
         <span className="title">
           <sup>Just</sup>Chatting
         </span>
 
         {children}
-      </FlexStyles>
+      </Flex>
     </SignLayoutContainerStyles>
   );
 };
+
+export default SignLayout;

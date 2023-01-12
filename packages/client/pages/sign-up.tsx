@@ -26,7 +26,7 @@ import useValidate from "@/core/hooks/useValidate";
 
 import SignLayout from "@/layouts/sign";
 
-import { FlexStyles } from "@/styles/common/flex.style";
+import { Flex } from "@/styles/common/flex.style";
 import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 
 export default () => {
@@ -120,8 +120,8 @@ export default () => {
 
   return (
     <SignLayout>
-      <FlexStyles column className="form">
-        <FlexStyles column className="input-groups">
+      <Flex column className="form">
+        <Flex column className="input-groups">
           <Input
             title="이메일"
             placeholder="example@example.com"
@@ -173,16 +173,16 @@ export default () => {
             onChange={(e) => setName(e.target.value)}
             onEnter={handlerSignUp}
           />
-        </FlexStyles>
+        </Flex>
 
-        <FlexStyles className="button-groups">
+        <Flex className="button-groups">
           <Button onClick={handlerSignUp}>회원가입</Button>
-        </FlexStyles>
-      </FlexStyles>
+        </Flex>
+      </Flex>
 
-      <FlexStyles justifyContent="center" className="link-groups">
+      <Flex justifyContent="center" className="link-groups">
         <Link href="/sign-in">이미 계정이 있습니다.</Link>
-      </FlexStyles>
+      </Flex>
     </SignLayout>
   );
 };
