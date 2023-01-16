@@ -7,16 +7,16 @@ class Users extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
 
-  @Column('varchar', { unique: true })
+  @Column('varchar', { nullable: false, unique: true })
   email: string;
 
-  @Column('varchar')
+  @Column('varchar', { nullable: false })
   password: string;
 
-  @Column('varchar')
+  @Column('varchar', { nullable: false })
   name: string;
 
-  @Column('varchar', { unique: true })
+  @Column('varchar', { nullable: false, unique: true })
   nickname: string;
 }
 
