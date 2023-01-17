@@ -26,7 +26,7 @@ export const IsDataType = (type: DataType) => {
     case 'STRING':
       return IsString({ message: (args) => createMessage(type, args) });
     case 'NUMBER':
-      return IsNumber(null, { message: (args) => createMessage(type, args) });
+      return IsNumber({}, { message: (args) => createMessage(type, args) });
     case 'BOOLEAN':
       return IsBoolean({ message: (args) => createMessage(type, args) });
   }
