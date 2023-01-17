@@ -10,10 +10,10 @@ class Rooms extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
 
-  @Column('string', { unique: true, nullable: false })
-  uuid: string;
+  @Column('varchar', { unique: true, nullable: false })
+  roomId: string;
 
-  @Column('number', { nullable: false })
+  @Column('int', { nullable: false })
   type: RoomType;
 
   @Column('varchar', { nullable: false })
@@ -22,11 +22,11 @@ class Rooms extends BaseEntity {
   @Column('varchar')
   password: string;
 
-  @Column('number', { nullable: false })
+  @Column('int', { nullable: false })
   maximum: number;
 
   @ManyToOne(() => Users)
-  @Column({ name: '', nullable: false })
+  @Column('int', { name: 'user_id', nullable: false })
   user: Users;
 }
 
