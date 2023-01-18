@@ -18,11 +18,14 @@ export const GlobalStyles = css`
     outline: none;
   }
 
-  button:focus,
-  input:focus {
-    outline: solid ${ThemeColors.main.active};
-    outline-width: 2px;
-    transition: 0.1s;
+  button,
+  input {
+    border: solid 2px rgba(0, 0, 0, 0);
+    transition: 0.1s border;
+
+    &:focus {
+      border: solid 2px ${ThemeColors.main.active};
+    }
   }
 
   html,

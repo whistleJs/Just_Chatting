@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 
 import { CommonContainerStyles } from "@/styles/common/page.style";
+import { ThemeColors } from "@/styles/common/theme.style";
 
 const BounceAnimation = keyframes`
   0% {
@@ -34,6 +35,8 @@ export const SignLayoutContainerStyles = styled(CommonContainerStyles)`
   }
 
   & .form {
+    display: flex;
+    flex-direction: column;
     margin-top: 10px;
   }
 
@@ -45,6 +48,11 @@ export const SignLayoutContainerStyles = styled(CommonContainerStyles)`
 
     & input {
       margin: 6px 0 8px;
+    }
+
+    & span.error-text {
+      font-size: 14px;
+      color: ${ThemeColors.red.default};
     }
   }
 

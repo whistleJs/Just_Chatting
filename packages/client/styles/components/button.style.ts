@@ -19,7 +19,6 @@ export const ButtonSizes = {
 
 export const BaseButtonStyles = css({
   width: "100%",
-  border: "none",
   borderRadius: "4px",
   backgroundColor: "white",
   tranistion: ".1s",

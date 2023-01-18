@@ -1,77 +1,54 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { css } from "@emotion/react";
 
 import AuthService from "@/api/AuthService";
+import { AuthSignInRequest } from "@/api/model/auth.model";
 
 import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 
 import {
-  EMAIL_ERROR_CODE,
   EMAIL_ERROR_MESSAGE,
   EMAIL_REGEX,
-  PASSWORD_ERROR_CODE,
   PASSWORD_ERROR_MESSAGE,
   PASSWORD_REGEX,
 } from "@/core/constants/account.constants";
-import useValidate from "@/core/hooks/useValidate";
 import useToast from "@/core/hooks/useToast";
 
 import SignLayout from "@/layouts/sign";
 
 import { Flex } from "@/styles/common/flex.style";
+import { ThemeColors } from "@/styles/common/theme.style";
 import { BaseButtonStyles } from "@/styles/components/button.style";
 import { BaseInputStyles } from "@/styles/components/input.style";
 
 export default () => {
-  const [emailErrorCode, setEmailErrorCode] = useState<EMAIL_ERROR_CODE | null>(null);
-  const [passwordErrorCode, setPasswordErrorCode] = useState<PASSWORD_ERROR_CODE | null>(null);
-
-  const [email, isInvalidEmail, setEmail] = useValidate(EMAIL_REGEX);
-  const [password, isInvalidPassword, setPassword] = useValidate(PASSWORD_REGEX);
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+    setError,
+  } = useForm<AuthSignInRequest>();
 
   const { createToast } = useToast();
 
-  const validate = () => {
-    let isValidate = true;
-
-    if (isInvalidEmail) {
-      setEmailErrorCode("INVALID");
-      isValidate = false;
-    } else {
-      setEmailErrorCode(null);
-    }
-
-    if (isInvalidPassword) {
-      setPasswordErrorCode("INVALID");
-      isValidate = false;
-    } else {
-      setPasswordErrorCode(null);
-    }
-
-    return isValidate;
-  };
-
-  const handlerSignIn = async () => {
-    if (!validate()) return;
-
+  const onValid = async (request: AuthSignInRequest) => {
     try {
-      await AuthService.signIn({ email, password });
+      await AuthService.signIn(request);
     } catch (error) {
       if (typeof error === "string") {
         switch (error as TOAST_MESSAGE_TYPE) {
           case "NOT_FOUND_USER":
-            setEmailErrorCode("NOT_FOUND");
-            break;
+            setError("email", { message: EMAIL_ERROR_MESSAGE.NOT_FOUND });
+            return;
           case "INCORRECT_PASSWORD":
-            setPasswordErrorCode("INCORRECT");
-            break;
+            setError("password", { message: PASSWORD_ERROR_MESSAGE.INCORRECT });
+            return;
           default:
             createToast(error as TOAST_MESSAGE_TYPE);
-            break;
+            return;
         }
       }
-
-      return;
     }
 
     createToast("SUCCESS_SIGN_IN");
@@ -79,27 +56,53 @@ export default () => {
 
   return (
     <SignLayout>
-      <Flex column className="form">
+      <form className="form" onSubmit={handleSubmit(onValid)}>
         <Flex column className="input-groups">
           {/* Email */}
           <Flex column className="input-group">
-            <span css={{ fontSize: "16px" }}>이메일</span>
-            <input type="email" placeholder="example@example.com" css={BaseInputStyles} />
+            <span>이메일</span>
+
+            <input
+              type="text"
+              placeholder="example@example.com"
+              css={css`
+                ${BaseInputStyles};
+                ${errors.email && `border: solid 2px ${ThemeColors.red.default} !important`};
+              `}
+              {...register("email", {
+                required: { value: true, message: EMAIL_ERROR_MESSAGE.REQUIRED },
+                pattern: { value: new RegExp(EMAIL_REGEX), message: EMAIL_ERROR_MESSAGE.INVALID },
+              })}
+            />
+
+            {errors.email && <span className="error-text">{errors.email.message}</span>}
           </Flex>
 
           {/* Password */}
           <Flex column className="input-group">
-            <span css={{ fontSize: "16px" }}>비밀번호</span>
-            <input type="password" placeholder="Password" css={BaseInputStyles} />
+            <span>비밀번호</span>
+
+            <input
+              type="password"
+              placeholder="Password"
+              css={css`
+                ${BaseInputStyles};
+                ${errors.password && `border: solid 2px ${ThemeColors.red.default} !important`};
+              `}
+              {...register("password", {
+                required: { value: true, message: PASSWORD_ERROR_MESSAGE.REQUIRED },
+                pattern: { value: new RegExp(PASSWORD_REGEX), message: PASSWORD_ERROR_MESSAGE.INVALID },
+              })}
+            />
+
+            {errors.password && <span className="error-text">{errors.password.message}</span>}
           </Flex>
         </Flex>
 
         <Flex className="button-groups">
-          <button css={BaseButtonStyles} onClick={handlerSignIn}>
-            로그인
-          </button>
+          <button css={BaseButtonStyles}>로그인</button>
         </Flex>
-      </Flex>
+      </form>
 
       <Flex justifyContent="center" className="link-groups">
         <Link href="/sign-up">계정이 존재하지 않습니다.</Link>
