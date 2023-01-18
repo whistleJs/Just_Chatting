@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import AuthService from "@/api/AuthService";
 
-import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 
@@ -21,6 +20,7 @@ import useToast from "@/core/hooks/useToast";
 import SignLayout from "@/layouts/sign";
 
 import { Flex } from "@/styles/common/flex.style";
+import { BaseButtonStyles } from "@/styles/components/button.style";
 
 export default () => {
   const [emailErrorCode, setEmailErrorCode] = useState<EMAIL_ERROR_CODE | null>(null);
@@ -104,7 +104,9 @@ export default () => {
         </Flex>
 
         <Flex className="button-groups">
-          <Button onClick={handlerSignIn}>로그인</Button>
+          <button css={BaseButtonStyles} onClick={handlerSignIn}>
+            로그인
+          </button>
         </Flex>
       </Flex>
 
