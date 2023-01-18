@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import AuthService from "@/api/AuthService";
 
-import Input from "@/components/Input";
 import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 
 import {
@@ -21,6 +20,7 @@ import SignLayout from "@/layouts/sign";
 
 import { Flex } from "@/styles/common/flex.style";
 import { BaseButtonStyles } from "@/styles/components/button.style";
+import { BaseInputStyles } from "@/styles/components/input.style";
 
 export default () => {
   const [emailErrorCode, setEmailErrorCode] = useState<EMAIL_ERROR_CODE | null>(null);
@@ -81,26 +81,17 @@ export default () => {
     <SignLayout>
       <Flex column className="form">
         <Flex column className="input-groups">
-          <Input
-            title="이메일"
-            placeholder="example@example.com"
-            value={email}
-            text={emailErrorCode && EMAIL_ERROR_MESSAGE[emailErrorCode]}
-            isError={emailErrorCode !== null}
-            onChange={(e) => setEmail(e.target.value)}
-            onEnter={handlerSignIn}
-          />
+          {/* Email */}
+          <Flex column className="input-group">
+            <span css={{ fontSize: "16px" }}>이메일</span>
+            <input type="email" placeholder="example@example.com" css={BaseInputStyles} />
+          </Flex>
 
-          <Input
-            type="password"
-            title="비밀번호"
-            placeholder="Password"
-            value={password}
-            text={passwordErrorCode && PASSWORD_ERROR_MESSAGE[passwordErrorCode]}
-            isError={passwordErrorCode !== null}
-            onChange={(e) => setPassword(e.target.value)}
-            onEnter={handlerSignIn}
-          />
+          {/* Password */}
+          <Flex column className="input-group">
+            <span css={{ fontSize: "16px" }}>비밀번호</span>
+            <input type="password" placeholder="Password" css={BaseInputStyles} />
+          </Flex>
         </Flex>
 
         <Flex className="button-groups">

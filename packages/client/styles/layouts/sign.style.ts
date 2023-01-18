@@ -18,9 +18,13 @@ const BounceAnimation = keyframes`
 `;
 
 export const SignLayoutContainerStyles = styled(CommonContainerStyles)`
+  & span,
+  & a {
+    color: white;
+  }
+
   & span.title {
     font-size: 64px;
-    color: white;
 
     & > sup {
       display: inline-block;
@@ -34,13 +38,13 @@ export const SignLayoutContainerStyles = styled(CommonContainerStyles)`
   }
 
   /* Input Groups */
-  & .input-groups > div {
+  & .input-group {
     &:not(:first-of-type) {
       margin-top: 16px;
     }
 
-    & > .title {
-      color: white;
+    & input {
+      margin: 6px 0 8px;
     }
   }
 
@@ -56,7 +60,6 @@ export const SignLayoutContainerStyles = styled(CommonContainerStyles)`
 
     & > a {
       font-size: 14px;
-      color: white;
       text-decoration: underline;
     }
   }

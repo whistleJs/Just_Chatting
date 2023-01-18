@@ -4,9 +4,6 @@ import { useState } from "react";
 
 import AuthService from "@/api/AuthService";
 
-import Button from "@/components/Button";
-import Input from "@/components/Input";
-
 import {
   EMAIL_ERROR_CODE,
   EMAIL_ERROR_MESSAGE,
@@ -29,6 +26,7 @@ import SignLayout from "@/layouts/sign";
 import { Flex } from "@/styles/common/flex.style";
 import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 import { BaseButtonStyles } from "@/styles/components/button.style";
+import { BaseInputStyles } from "@/styles/components/input.style";
 
 export default () => {
   const router = useRouter();
@@ -122,58 +120,42 @@ export default () => {
   return (
     <SignLayout>
       <Flex column className="form">
-        <Flex column className="input-groups">
-          <Input
-            title="이메일"
-            placeholder="example@example.com"
-            value={email}
-            text={emailErrorCode && EMAIL_ERROR_MESSAGE[emailErrorCode]}
-            isError={emailErrorCode !== null}
-            onChange={(e) => setEmail(e.target.value)}
-            onEnter={handlerSignUp}
-          />
+        <Flex column>
+          {/* Email */}
+          <Flex column className="input-group">
+            <span>이메일</span>
+            <input type="email" placeholder="example@example.com" css={BaseInputStyles} />
+          </Flex>
 
-          <Input
-            title="닉네임"
-            placeholder="Nickname"
-            value={nickname}
-            text={nicknameErrorCode && NICKNAME_ERROR_MESSAGE[nicknameErrorCode]}
-            isError={nicknameErrorCode !== null}
-            onChange={(e) => setNickname(e.target.value)}
-            onEnter={handlerSignUp}
-          />
+          {/* Nickname */}
+          <Flex column className="input-group">
+            <span>닉네임</span>
+            <input type="text" placeholder="Nickname" css={BaseInputStyles} />
+          </Flex>
 
-          <Input
-            type="password"
-            title="비밀번호"
-            placeholder="Password"
-            value={password}
-            text={passwordErrorCode && PASSWORD_ERROR_MESSAGE[passwordErrorCode]}
-            isError={passwordErrorCode !== null}
-            onChange={(e) => setPassword(e.target.value)}
-            onEnter={handlerSignUp}
-          />
+          {/* Nickname */}
+          <Flex column className="input-group">
+            <span>닉네임</span>
+            <input type="text" placeholder="Nickname" css={BaseInputStyles} />
+          </Flex>
 
-          <Input
-            type="password"
-            title="비밀번호 확인"
-            placeholder="Password Confirm"
-            value={passwordConfirm}
-            text={passwordConfirmErrorCode && PASSWORD_ERROR_MESSAGE[passwordConfirmErrorCode]}
-            isError={passwordConfirmErrorCode !== null}
-            onChange={(e) => setPasswordConfirm(e.target.value)}
-            onEnter={handlerSignUp}
-          />
+          {/* Password */}
+          <Flex column className="input-group">
+            <span>비밀번호</span>
+            <input type="password" placeholder="Password" css={BaseInputStyles} />
+          </Flex>
 
-          <Input
-            title="이름"
-            placeholder="Name"
-            value={name}
-            text={nameErrorCode && NAME_ERROR_MESSAGE[nameErrorCode]}
-            isError={nameErrorCode !== null}
-            onChange={(e) => setName(e.target.value)}
-            onEnter={handlerSignUp}
-          />
+          {/* Password Confirm */}
+          <Flex column className="input-group">
+            <span>비밀번호 확인</span>
+            <input type="password" placeholder="Password Confirm" css={BaseInputStyles} />
+          </Flex>
+
+          {/* Name */}
+          <Flex column className="input-group">
+            <span>이름</span>
+            <input type="text" placeholder="Name" css={BaseInputStyles} />
+          </Flex>
         </Flex>
 
         <Flex className="button-groups">
