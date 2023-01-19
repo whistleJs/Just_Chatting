@@ -19,7 +19,7 @@ import SignLayout from "@/layouts/sign";
 
 import { Flex } from "@/styles/common/flex.style";
 import { ThemeColors } from "@/styles/common/theme.style";
-import { BaseButtonStyles } from "@/styles/components/button.style";
+import { Button } from "@/styles/components/button.style";
 import { Input } from "@/styles/components/input.style";
 
 export default () => {
@@ -98,7 +98,7 @@ export default () => {
         </Flex>
 
         <Flex className="button-groups">
-          <button css={BaseButtonStyles}>로그인</button>
+          <Button>로그인</Button>
         </Flex>
       </form>
 

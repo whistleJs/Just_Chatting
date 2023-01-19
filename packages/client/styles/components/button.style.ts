@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 import { ThemeColors } from "@/styles/common/theme.style";
 
@@ -17,7 +17,7 @@ export const ButtonSizes = {
   },
 };
 
-export const BaseButtonStyles = css({
+export const Button = styled.button({
   width: "100%",
   borderRadius: "4px",
   backgroundColor: "white",

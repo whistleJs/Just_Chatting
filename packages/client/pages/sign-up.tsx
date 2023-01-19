@@ -25,7 +25,7 @@ import SignLayout from "@/layouts/sign";
 
 import { Flex } from "@/styles/common/flex.style";
 import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
-import { BaseButtonStyles } from "@/styles/components/button.style";
+import { Button } from "@/styles/components/button.style";
 import { Input } from "@/styles/components/input.style";
 
 export default () => {
@@ -159,9 +159,7 @@ export default () => {
         </Flex>
 
         <Flex className="button-groups">
-          <button css={BaseButtonStyles} onClick={handlerSignUp}>
-            회원가입
-          </button>
+          <Button onClick={handlerSignUp}>회원가입</Button>
         </Flex>
       </Flex>
 
