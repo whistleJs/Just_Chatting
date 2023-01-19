@@ -4,7 +4,7 @@ import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 
 import { toastAtom } from "@/store/toast.store";
 
-export default () => {
+const useToast = () => {
   const [toastList, setToastList] = useAtom(toastAtom);
 
   const createToast = (toastType: TOAST_MESSAGE_TYPE) => {
@@ -17,3 +17,5 @@ export default () => {
 
   return { toastList, createToast, removeToast };
 };
+
+export default useToast;
