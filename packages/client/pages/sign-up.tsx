@@ -26,7 +26,7 @@ import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 import { Button } from "@/styles/components/button.style";
 import { Input } from "@/styles/components/input.style";
 
-export default () => {
+const SignUpPage = () => {
   const router = useRouter();
 
   const {
@@ -175,3 +175,5 @@ export default () => {
     </SignLayout>
   );
 };
+
+export default SignUpPage;

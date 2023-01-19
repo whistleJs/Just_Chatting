@@ -6,7 +6,7 @@ import Toast from "@/components/Toast";
 import ThemeOption from "@/styles/common/theme.style";
 import { GlobalStyles } from "@/styles/common/global.style";
 
-export default ({ Component, pageProps }: AppProps) => {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <ThemeProvider theme={ThemeOption}>
@@ -18,3 +18,5 @@ export default ({ Component, pageProps }: AppProps) => {
     </>
   );
 };
+
+export default App;

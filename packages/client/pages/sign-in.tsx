@@ -22,7 +22,7 @@ import { ThemeColors } from "@/styles/common/theme.style";
 import { Button } from "@/styles/components/button.style";
 import { Input } from "@/styles/components/input.style";
 
-export default () => {
+const SignInPage = () => {
   const {
     formState: { errors },
     register,
@@ -108,3 +108,5 @@ export default () => {
     </SignLayout>
   );
 };
+
+export default SignInPage;
