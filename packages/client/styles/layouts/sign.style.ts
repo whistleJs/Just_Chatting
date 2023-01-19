@@ -34,7 +34,7 @@ export const SignLayoutContainerStyles = styled(CommonContainerStyles)`
     }
   }
 
-  & .form {
+  & form {
     display: flex;
     flex-direction: column;
     margin-top: 10px;

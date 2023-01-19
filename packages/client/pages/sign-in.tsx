@@ -56,7 +56,7 @@ export default () => {
 
   return (
     <SignLayout>
-      <form className="form" onSubmit={handleSubmit(onValid)}>
+      <form onSubmit={handleSubmit(onValid)}>
         <Flex column className="input-groups">
           {/* Email */}
           <Flex column className="input-group">
