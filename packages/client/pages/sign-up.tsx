@@ -26,7 +26,7 @@ import SignLayout from "@/layouts/sign";
 import { Flex } from "@/styles/common/flex.style";
 import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 import { BaseButtonStyles } from "@/styles/components/button.style";
-import { BaseInputStyles } from "@/styles/components/input.style";
+import { Input } from "@/styles/components/input.style";
 
 export default () => {
   const router = useRouter();
@@ -124,37 +124,37 @@ export default () => {
           {/* Email */}
           <Flex column className="input-group">
             <span>이메일</span>
-            <input type="email" placeholder="example@example.com" css={BaseInputStyles} />
+            <Input type="email" placeholder="example@example.com" />
           </Flex>
 
           {/* Nickname */}
           <Flex column className="input-group">
             <span>닉네임</span>
-            <input type="text" placeholder="Nickname" css={BaseInputStyles} />
+            <Input type="text" placeholder="Nickname" />
           </Flex>
 
           {/* Nickname */}
           <Flex column className="input-group">
             <span>닉네임</span>
-            <input type="text" placeholder="Nickname" css={BaseInputStyles} />
+            <Input type="text" placeholder="Nickname" />
           </Flex>
 
           {/* Password */}
           <Flex column className="input-group">
             <span>비밀번호</span>
-            <input type="password" placeholder="Password" css={BaseInputStyles} />
+            <Input type="password" placeholder="Password" />
           </Flex>
 
           {/* Password Confirm */}
           <Flex column className="input-group">
             <span>비밀번호 확인</span>
-            <input type="password" placeholder="Password Confirm" css={BaseInputStyles} />
+            <Input type="password" placeholder="Password Confirm" />
           </Flex>
 
           {/* Name */}
           <Flex column className="input-group">
             <span>이름</span>
-            <input type="text" placeholder="Name" css={BaseInputStyles} />
+            <Input type="text" placeholder="Name" />
           </Flex>
         </Flex>
 

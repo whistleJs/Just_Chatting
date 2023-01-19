@@ -20,7 +20,7 @@ import SignLayout from "@/layouts/sign";
 import { Flex } from "@/styles/common/flex.style";
 import { ThemeColors } from "@/styles/common/theme.style";
 import { BaseButtonStyles } from "@/styles/components/button.style";
-import { BaseInputStyles } from "@/styles/components/input.style";
+import { Input } from "@/styles/components/input.style";
 
 export default () => {
   const {
@@ -62,12 +62,11 @@ export default () => {
           <Flex column className="input-group">
             <span>이메일</span>
 
-            <input
+            <Input
               type="text"
               placeholder="example@example.com"
               css={css`
-                ${BaseInputStyles};
-                ${errors.email && `border: solid 2px ${ThemeColors.red.default} !important`};
+                ${errors.email && `border: solid 2px ${ThemeColors.red.default} !important;`}
               `}
               {...register("email", {
                 required: { value: true, message: EMAIL_ERROR_MESSAGE.REQUIRED },
@@ -82,12 +81,11 @@ export default () => {
           <Flex column className="input-group">
             <span>비밀번호</span>
 
-            <input
+            <Input
               type="password"
               placeholder="Password"
               css={css`
-                ${BaseInputStyles};
-                ${errors.password && `border: solid 2px ${ThemeColors.red.default} !important`};
+                ${errors.password && `border: solid 2px ${ThemeColors.red.default} !important;`}
               `}
               {...register("password", {
                 required: { value: true, message: PASSWORD_ERROR_MESSAGE.REQUIRED },
