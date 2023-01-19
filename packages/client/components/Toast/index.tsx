@@ -4,11 +4,11 @@ import { TOAST_MESSAGES } from "@/core/constants/toast.constants";
 import useToast from "@/core/hooks/useToast";
 
 import { CommonToastContainerStyles, CommonToastStyles, TOTAL_ANIMATE_TIMES } from "./style";
-import { Toast } from "./model";
+import { ToastData } from "./model";
 
 const Toast = () => {
   const timeoutRef = useRef<NodeJS.Timeout>();
-  const [activeToast, setActiveToast] = useState<Toast>();
+  const [activeToast, setActiveToast] = useState<ToastData>();
   const { toastList, removeToast } = useToast();
 
   // Handler

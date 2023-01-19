@@ -4,11 +4,11 @@ export type SIGN_UP_TOAST_MESSAGE_TYPE = "SUCCESS_SIGN_UP" | "ALREADY_EMAIL" | "
 export type SIGN_IN_TOAST_MESSAGE_TYPE = "SUCCESS_SIGN_IN" | "NOT_FOUND_USER" | "INCORRECT_PASSWORD";
 export type TOAST_MESSAGE_TYPE = DEFAULT_TOAST_MESSAGE_TYPE | SIGN_UP_TOAST_MESSAGE_TYPE | SIGN_IN_TOAST_MESSAGE_TYPE;
 
-export interface Toast {
+export interface ToastData {
   type: ToastType;
   message: string;
 }
 
 export type ToastMessageData = {
-  [key in TOAST_MESSAGE_TYPE]?: Toast;
+  [key in TOAST_MESSAGE_TYPE]?: ToastData;
 };
