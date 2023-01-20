@@ -1,43 +1,20 @@
 import styled from "@emotion/styled";
-import { keyframes } from "@emotion/react";
 
-import { CommonContainerStyles } from "@/styles/common/page.style";
 import { ThemeColors } from "@/styles/common/theme.style";
+import { CommonContainerStyles } from "@/styles/common/page.style";
 
-const BounceAnimation = keyframes`
-  0% {
-    transform: scale(1) rotateZ(-15deg) translate(10px, -10px);
-  }
-
-  50% {
-    transform: scale(0.85) rotateZ(-15deg) translate(10px, -10px);
-  }
-
-  100% {
-    transform: scale(1) rotateZ(-15deg) translate(10px, -10px);
-  }
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
 `;
 
-export const SignLayoutContainerStyles = styled(CommonContainerStyles)`
-  & span,
-  & a {
+export const Container = styled(CommonContainerStyles)`
+  & .sign-layout__title {
     color: white;
-  }
-
-  & span.title {
-    font-size: 64px;
-
-    & > sup {
-      display: inline-block;
-      font-size: 32px;
-      animation: ${BounceAnimation} 1s infinite;
-    }
-  }
-
-  & form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: 3px;
   }
 
   /* Input Groups */

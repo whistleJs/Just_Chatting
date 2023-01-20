@@ -3,14 +3,39 @@ import localFont from "@next/font/local";
 
 import { ThemeColors } from "./theme.style";
 
-const BazziFont = localFont({
-  src: "./fonts/Bazzi.woff",
-  weight: "400",
+const SpoqaHanSansNeoFont = localFont({
+  src: [
+    {
+      path: './fonts/SpoqaHanSansNeo-Thin.otf',
+      weight: '100',
+      style: 'thin'
+    },
+    {
+      path: './fonts/SpoqaHanSansNeo-Light.otf',
+      weight: '300',
+      style: 'light'
+    },
+    {
+      path: './fonts/SpoqaHanSansNeo-Regular.otf',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: './fonts/SpoqaHanSansNeo-Medium.otf',
+      weight: '500',
+      style: 'medium'
+    },
+    {
+      path: './fonts/SpoqaHanSansNeo-Bold.otf',
+      weight: '700',
+      style: 'bold'
+    }
+  ]
 });
 
 export const GlobalStyles = css`
   * {
-    ${BazziFont.style}
+    ${SpoqaHanSansNeoFont.style}
     margin: 0;
     padding: 0;
     box-sizing: border-box;

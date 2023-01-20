@@ -21,6 +21,7 @@ import { Flex } from "@/styles/common/flex.style";
 import { ThemeColors } from "@/styles/common/theme.style";
 import { Button } from "@/styles/components/button.style";
 import { Input } from "@/styles/components/input.style";
+import { Form } from "@/styles/layouts/sign.style";
 
 const SignInPage = () => {
   const {
@@ -55,8 +56,8 @@ const SignInPage = () => {
   };
 
   return (
-    <SignLayout>
-      <form onSubmit={handleSubmit(onValid)}>
+    <SignLayout title="LOGIN">
+      <Form onSubmit={handleSubmit(onValid)}>
         <Flex column className="input-groups">
           {/* Email */}
           <Flex column className="input-group">
@@ -100,7 +101,7 @@ const SignInPage = () => {
         <Flex className="button-groups">
           <Button>로그인</Button>
         </Flex>
-      </form>
+      </Form>
 
       <Flex justifyContent="center" className="link-groups">
         <Link href="/sign-up">계정이 존재하지 않습니다.</Link>

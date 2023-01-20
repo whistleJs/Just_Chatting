@@ -64,7 +64,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <SignLayout>
+    <SignLayout title="REGISTER">
       <form onSubmit={handleSubmit(onValid)}>
         <Flex column>
           {/* Email */}
