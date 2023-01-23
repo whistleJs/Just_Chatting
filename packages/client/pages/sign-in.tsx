@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { css } from "@emotion/react";
 
 import AuthService from "@/api/AuthService";
 import { AuthSignInRequest } from "@/api/model/auth.model";
 
+import { InputGroup } from "@/components/InputGroup";
 import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 
 import {
@@ -18,7 +18,6 @@ import useToast from "@/core/hooks/useToast";
 import SignLayout from "@/layouts/sign";
 
 import { Flex } from "@/styles/common/flex.style";
-import { ThemeColors } from "@/styles/common/theme.style";
 import { Button } from "@/styles/components/button.style";
 import { Input } from "@/styles/components/input.style";
 import { Form } from "@/styles/layouts/sign.style";
@@ -56,50 +55,38 @@ const SignInPage = () => {
   };
 
   return (
-    <SignLayout title="LOGIN">
+    <SignLayout title="로그인">
       <Form onSubmit={handleSubmit(onValid)}>
-        <Flex column className="input-groups">
+        <Flex column>
           {/* Email */}
-          <Flex column className="input-group">
-            <span>이메일</span>
-
+          <InputGroup title="이메일" message={errors.email?.message}>
             <Input
               type="text"
               placeholder="example@example.com"
-              css={css`
-                ${errors.email && `border: solid 2px ${ThemeColors.red.default} !important;`}
-              `}
+              status={errors.email ? "error" : "default"}
               {...register("email", {
                 required: { value: true, message: EMAIL_ERROR_MESSAGE.REQUIRED },
                 pattern: { value: new RegExp(EMAIL_REGEX), message: EMAIL_ERROR_MESSAGE.INVALID },
               })}
             />
-
-            {errors.email && <span className="error-text">{errors.email.message}</span>}
-          </Flex>
+          </InputGroup>
 
           {/* Password */}
-          <Flex column className="input-group">
-            <span>비밀번호</span>
-
+          <InputGroup title="비밀번호" message={errors.password?.message}>
             <Input
               type="password"
               placeholder="Password"
-              css={css`
-                ${errors.password && `border: solid 2px ${ThemeColors.red.default} !important;`}
-              `}
+              status={errors.password ? "error" : "default"}
               {...register("password", {
                 required: { value: true, message: PASSWORD_ERROR_MESSAGE.REQUIRED },
                 pattern: { value: new RegExp(PASSWORD_REGEX), message: PASSWORD_ERROR_MESSAGE.INVALID },
               })}
             />
-
-            {errors.password && <span className="error-text">{errors.password.message}</span>}
-          </Flex>
+          </InputGroup>
         </Flex>
 
         <Flex className="button-groups">
-          <Button>로그인</Button>
+          <Button disabled={!!errors.email || !!errors.password}>로그인</Button>
         </Flex>
       </Form>
 

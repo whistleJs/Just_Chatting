@@ -25,6 +25,8 @@ import { ThemeColors } from "@/styles/common/theme.style";
 import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 import { Button } from "@/styles/components/button.style";
 import { Input } from "@/styles/components/input.style";
+import { Form } from "@/styles/layouts/sign.style";
+import { InputGroup } from "@/components/InputGroup";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -64,110 +66,86 @@ const SignUpPage = () => {
   };
 
   return (
-    <SignLayout title="REGISTER">
-      <form onSubmit={handleSubmit(onValid)}>
+    <SignLayout title="회원가입">
+      <Form onSubmit={handleSubmit(onValid)}>
         <Flex column>
           {/* Email */}
-          <Flex column className="input-group">
-            <span>이메일</span>
-
+          <InputGroup title="이메일" message={errors.email?.message}>
             <Input
-              type="email"
+              type="text"
               placeholder="example@example.com"
-              css={css`
-                ${errors.email && `border: solid 2px ${ThemeColors.red.default} !important;`}
-              `}
+              status={errors.email ? "error" : "default"}
               {...register("email", {
                 required: { value: true, message: EMAIL_ERROR_MESSAGE.REQUIRED },
                 pattern: { value: new RegExp(EMAIL_REGEX), message: EMAIL_ERROR_MESSAGE.INVALID },
               })}
             />
-
-            {errors.email && <span className="error-text">{errors.email.message}</span>}
-          </Flex>
+          </InputGroup>
 
           {/* Nickname */}
-          <Flex column className="input-group">
-            <span>닉네임</span>
-
+          <InputGroup title="닉네임" message={errors.nickname?.message}>
             <Input
               type="text"
               placeholder="Nickname"
-              css={css`
-                ${errors.nickname && `border: solid 2px ${ThemeColors.red.default} !important;`}
-              `}
+              status={errors.nickname ? "error" : "default"}
               {...register("nickname", {
                 required: { value: true, message: NICKNAME_ERROR_MESSAGE.REQUIRED },
                 pattern: { value: new RegExp(NICKNAME_REGEX), message: NICKNAME_ERROR_MESSAGE.INVALID },
               })}
             />
-
-            {errors.nickname && <span className="error-text">{errors.nickname.message}</span>}
-          </Flex>
+          </InputGroup>
 
           {/* Password */}
-          <Flex column className="input-group">
-            <span>비밀번호</span>
-
+          <InputGroup title="비밀번호" message={errors.password?.message}>
             <Input
               type="password"
               placeholder="Password"
-              css={css`
-                ${errors.password && `border: solid 2px ${ThemeColors.red.default} !important;`}
-              `}
+              status={errors.password ? "error" : "default"}
               {...register("password", {
                 required: { value: true, message: PASSWORD_ERROR_MESSAGE.REQUIRED },
                 pattern: { value: new RegExp(PASSWORD_REGEX), message: PASSWORD_ERROR_MESSAGE.INVALID },
               })}
             />
-
-            {errors.password && <span className="error-text">{errors.password.message}</span>}
-          </Flex>
+          </InputGroup>
 
           {/* Password Confirm */}
-          <Flex column className="input-group">
-            <span>비밀번호 확인</span>
-
+          <InputGroup title="비밀번호 확인" message={errors.passwordConfirm?.message}>
             <Input
               type="password"
               placeholder="Password Confirm"
-              css={css`
-                ${errors.passwordConfirm && `border: solid 2px ${ThemeColors.red.default} !important;`}
-              `}
+              status={errors.passwordConfirm ? "error" : "default"}
               {...register("passwordConfirm", {
                 required: { value: true, message: PASSWORD_ERROR_MESSAGE.REQUIRED },
                 pattern: { value: new RegExp(PASSWORD_REGEX), message: PASSWORD_ERROR_MESSAGE.INVALID },
                 validate: { incorrect: (v) => v === getValues("password") || PASSWORD_ERROR_MESSAGE.INCORRECT },
               })}
             />
-
-            {errors.passwordConfirm && <span className="error-text">{errors.passwordConfirm.message}</span>}
-          </Flex>
+          </InputGroup>
 
           {/* Name */}
-          <Flex column className="input-group">
-            <span>이름</span>
-
+          <InputGroup title="이름" message={errors.name?.message}>
             <Input
               type="text"
               placeholder="Name"
-              css={css`
-                ${errors.name && `border: solid 2px ${ThemeColors.red.default} !important;`}
-              `}
+              status={errors.name ? "error" : "default"}
               {...register("name", {
                 required: { value: true, message: NAME_ERROR_MESSAGE.REQUIRED },
                 pattern: { value: new RegExp(NAME_REGEX), message: NAME_ERROR_MESSAGE.INVALID },
               })}
             />
-
-            {errors.name && <span className="error-text">{errors.name.message}</span>}
-          </Flex>
+          </InputGroup>
         </Flex>
 
         <Flex className="button-groups">
-          <Button>회원가입</Button>
+          <Button
+            disabled={
+              !!errors.email || !!errors.nickname || !!errors.password || !!errors.passwordConfirm || !!errors.name
+            }
+          >
+            회원가입
+          </Button>
         </Flex>
-      </form>
+      </Form>
 
       <Flex justifyContent="center" className="link-groups">
         <Link href="/sign-in">이미 계정이 있습니다.</Link>

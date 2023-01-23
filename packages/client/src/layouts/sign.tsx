@@ -1,5 +1,4 @@
-import { Flex } from "@/styles/common/flex.style";
-import { Container } from "@/styles/layouts/sign.style";
+import { Box, Container } from "@/styles/layouts/sign.style";
 
 interface SignLayoutProps {
   title: string
@@ -9,13 +8,13 @@ interface SignLayoutProps {
 const SignLayout = ({ title, children }: SignLayoutProps) => {
   return (
     <Container column alignItems="center" justifyContent="center">
-      <Flex column alignItems="center">
+      <Box column alignItems="center">
         <span className="sign-layout__title">
           {title}
         </span>
 
         {children}
-      </Flex>
+      </Box>
     </Container>
   );
 };

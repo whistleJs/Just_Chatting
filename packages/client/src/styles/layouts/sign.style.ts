@@ -1,34 +1,22 @@
 import styled from "@emotion/styled";
 
+import { Container as InputGroup } from "@/components/InputGroup/style";
+import { Flex } from "@/styles/common/flex.style";
 import { ThemeColors } from "@/styles/common/theme.style";
 import { CommonContainerStyles } from "@/styles/common/page.style";
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-`;
-
 export const Container = styled(CommonContainerStyles)`
   & .sign-layout__title {
-    color: white;
-    font-size: 48px;
-    font-weight: 500;
-    letter-spacing: 3px;
+    font-size: 24px;
+    font-weight: bold;
   }
 
-  /* Input Groups */
-  & .input-group {
+  & ${InputGroup} {
     &:not(:first-of-type) {
-      margin-top: 16px;
+      margin-top: 10px;
     }
 
-    & input {
-      margin: 6px 0 8px;
-    }
-
-    & span.error-text {
-      font-size: 14px;
+    & > .input-group__message {
       color: ${ThemeColors.red.default};
     }
   }
@@ -40,12 +28,28 @@ export const Container = styled(CommonContainerStyles)`
 
   /* Link Groups */
   & .link-groups {
-    margin-top: 20px;
-    width: 100%;
+    margin-top: 25px;
 
     & > a {
-      font-size: 14px;
+      color: ${ThemeColors.main.default};
+      font-size: 12px;
+      font-weight: 500;
       text-decoration: underline;
     }
   }
+`;
+
+export const Box = styled(Flex)`
+  padding: 40px 35px;
+  width: 330px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
 `;
