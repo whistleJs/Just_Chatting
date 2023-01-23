@@ -2,7 +2,7 @@ import { Theme, ThemeColor } from "@emotion/react";
 
 export const ThemeColors: ThemeColor = {
   main: {
-    disabled: "",
+    disabled: "#8e5ffd",
     default: "#5a27d5",
     active: "#3d1e8a",
   },

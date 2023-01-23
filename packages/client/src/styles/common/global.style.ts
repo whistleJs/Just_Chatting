@@ -35,7 +35,7 @@ export const GlobalStyles = css`
   }
 
   ::selection {
-    background-color: ${ThemeColors.main.active};
+    background-color: ${ThemeColors.main.disabled};
     color: white;
   }
 `;

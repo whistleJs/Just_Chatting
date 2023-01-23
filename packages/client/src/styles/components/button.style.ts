@@ -10,7 +10,7 @@ const ButtonSizes = {
   },
   middle: {
     padding: "8px 16px",
-    fontSize: "18px",
+    fontSize: "16px",
   },
   large: {
     padding: "10px 24px",
@@ -20,20 +20,29 @@ const ButtonSizes = {
 
 // Interface
 interface Props {
-  size?: keyof typeof ButtonSizes
+  size?: keyof typeof ButtonSizes;
 }
 
 // Component
-export const Button = styled.button<Props>(({ size = 'middle' }) => ({
+export const Button = styled.button<Props>(({ size = "middle" }) => ({
   width: "100%",
+  border: `solid 2px ${ThemeColors.main.disabled}`,
   borderRadius: "4px",
   backgroundColor: "white",
-  fontWeight: '500',
+  color: ThemeColors.main.disabled,
+  fontWeight: "500",
   tranistion: ".1s",
   cursor: "pointer",
   ...ButtonSizes[size],
   "&:hover, &:focus": {
-    backgroundColor: ThemeColors.main.active,
+    border: `solid 2px ${ThemeColors.main.default}`,
+    backgroundColor: ThemeColors.main.default,
     color: "white",
+  },
+  "&:disabled": {
+    border: `solid 2px ${ThemeColors.gray.default} !important`,
+    backgroundColor: "white !important",
+    color: `${ThemeColors.gray.default} !important`,
+    cursor: "not-allowed",
   },
 }));
