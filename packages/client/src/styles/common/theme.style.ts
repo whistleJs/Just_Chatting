@@ -26,6 +26,11 @@ export const ThemeColors: ThemeColor = {
     default: "#1378eb",
     active: "",
   },
+  gray: {
+    disabled: "",
+    default: "#aaaaaa",
+    active: "",
+  },
 };
 
 export type ThemeColorType = keyof typeof ThemeColors;

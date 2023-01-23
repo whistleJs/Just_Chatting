@@ -13,6 +13,7 @@ declare module "@emotion/react" {
     orange: ThemeColorDetail;
     green: ThemeColorDetail;
     blue: ThemeColorDetail;
+    gray: ThemeColorDetail;
   }
 
   export interface Theme {

@@ -22,6 +22,10 @@ export const GlobalStyles = css`
     }
   }
 
+  ::placeholder {
+    color: #cccccc;
+  }
+
   html,
   body {
     width: 100vw;

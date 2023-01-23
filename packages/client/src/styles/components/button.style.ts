@@ -28,6 +28,7 @@ export const Button = styled.button<Props>(({ size = 'middle' }) => ({
   width: "100%",
   borderRadius: "4px",
   backgroundColor: "white",
+  fontWeight: '500',
   tranistion: ".1s",
   cursor: "pointer",
   ...ButtonSizes[size],
