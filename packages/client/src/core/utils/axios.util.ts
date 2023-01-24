@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, HttpStatusCode } from "axios";
 
 import { getProdOrOther } from "./core.util";
 
@@ -27,6 +27,10 @@ axiosInstance.interceptors.response.use(
   (reject: AxiosError<AxiosErrorResponseData>) => {
     if (!reject.response || !reject.response.data) {
       throw "FAILED_REQUEST";
+    }
+
+    if (reject.response.status === HttpStatusCode.InternalServerError) {
+      throw "SERVER_ERROR";
     }
 
     throw reject.response.data.message || reject.response.data.statusCode;

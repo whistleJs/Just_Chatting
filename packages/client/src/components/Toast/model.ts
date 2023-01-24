@@ -1,5 +1,5 @@
 export type ToastType = "INFO" | "SUCCESS" | "WARNING" | "ERROR";
-export type DEFAULT_TOAST_TYPE = "FAILED_REQUEST";
+export type DEFAULT_TOAST_TYPE = "FAILED_REQUEST" | "SERVER_ERROR";
 export type ACCOUNT_TOAST_TYPE =
   | "SUCCESS_SIGN_UP"
   | "ALREADY_EMAIL"

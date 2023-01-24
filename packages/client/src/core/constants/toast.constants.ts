@@ -5,6 +5,10 @@ export const TOAST_MESSAGES: ToastMessageData = {
     type: "ERROR",
     message: "서버 요청에 실패했습니다.",
   },
+  SERVER_ERROR: {
+    type: "ERROR",
+    message: "일시적인 오류가 발생했습니다.",
+  },
   /* 회원가입 */
   SUCCESS_SIGN_UP: {
     type: "SUCCESS",
