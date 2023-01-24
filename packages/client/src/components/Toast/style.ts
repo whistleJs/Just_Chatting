@@ -5,7 +5,7 @@ import { getColorByStatus } from "@/core/utils/style.util";
 
 import { Flex } from "@/styles/common/flex.style";
 
-import { CommonToastStylesProp } from "./style.model";
+import { ToastType } from "./model";
 
 // Static Variable
 export const FADE_TIMES = 0.5 * 1000;
@@ -46,6 +46,12 @@ const ToastTimerAnimation = keyframes`
   }
 `;
 
+// Interface
+export interface Props {
+  type: ToastType;
+}
+
+// Components
 export const CommonToastContainerStyles = styled.div`
   position: fixed;
   left: 50px;
@@ -53,7 +59,7 @@ export const CommonToastContainerStyles = styled.div`
   z-index: 99999;
 `;
 
-export const CommonToastStyles = styled(Flex)<CommonToastStylesProp>(({ type }) => ({
+export const CommonToastStyles = styled(Flex)<Props>(({ type }) => ({
   position: "relative",
   padding: "16px 20px 24px",
   width: "250px",
@@ -62,14 +68,16 @@ export const CommonToastStyles = styled(Flex)<CommonToastStylesProp>(({ type }) 
   boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.16)",
   overflow: "hidden",
   animation: `${ToastAnimation} ${TOTAL_ANIMATE_TIMES}ms`,
-  "& > span.common-toast-title": {
+  "& > span.common-toast__title": {
     fontSize: "18px",
+    fontWeight: "bold",
   },
-  "& > span.common-toast-text": {
+  "& > span.common-toast__text": {
     marginTop: "4px",
-    fontSize: "16px",
+    fontSize: "14px",
+    fontWeight: "500",
   },
-  "& > .common-toast-timer": {
+  "& > .common-toast__timer": {
     position: "absolute",
     left: "0",
     bottom: "0",

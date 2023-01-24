@@ -5,7 +5,7 @@ import AuthService from "@/api/AuthService";
 import { AuthSignInRequest } from "@/api/model/auth.model";
 
 import { InputGroup } from "@/components/InputGroup";
-import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
+import { TOAST_TYPE } from "@/components/Toast/model";
 
 import {
   EMAIL_ERROR_MESSAGE,
@@ -37,7 +37,7 @@ const SignInPage = () => {
       await AuthService.signIn(request);
     } catch (error) {
       if (typeof error === "string") {
-        switch (error as TOAST_MESSAGE_TYPE) {
+        switch (error as TOAST_TYPE) {
           case "NOT_FOUND_USER":
             setError("email", { message: EMAIL_ERROR_MESSAGE.NOT_FOUND });
             return;
@@ -45,7 +45,7 @@ const SignInPage = () => {
             setError("password", { message: PASSWORD_ERROR_MESSAGE.INCORRECT });
             return;
           default:
-            createToast(error as TOAST_MESSAGE_TYPE);
+            createToast(error as TOAST_TYPE);
             return;
         }
       }

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { css } from "@emotion/react";
 
 import AuthService from "@/api/AuthService";
 import { AuthSignUpRequest } from "@/api/model/auth.model";
@@ -20,13 +19,12 @@ import useToast from "@/core/hooks/useToast";
 
 import SignLayout from "@/layouts/sign";
 
+import { InputGroup } from "@/components/InputGroup";
+import { TOAST_TYPE } from "@/components/Toast/model";
 import { Flex } from "@/styles/common/flex.style";
-import { ThemeColors } from "@/styles/common/theme.style";
-import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
 import { Button } from "@/styles/components/button.style";
 import { Input } from "@/styles/components/input.style";
 import { Form } from "@/styles/layouts/sign.style";
-import { InputGroup } from "@/components/InputGroup";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -46,7 +44,7 @@ const SignUpPage = () => {
       await AuthService.signUp(request);
     } catch (error) {
       if (typeof error === "string") {
-        switch (error as TOAST_MESSAGE_TYPE) {
+        switch (error as TOAST_TYPE) {
           case "ALREADY_EMAIL":
             setError("email", { message: EMAIL_ERROR_MESSAGE.DUPLICATE });
             return;
@@ -54,7 +52,7 @@ const SignUpPage = () => {
             setError("nickname", { message: NICKNAME_ERROR_MESSAGE.DUPLICATE });
             return;
           default:
-            createToast(error as TOAST_MESSAGE_TYPE);
+            createToast(error as TOAST_TYPE);
             return;
         }
       }

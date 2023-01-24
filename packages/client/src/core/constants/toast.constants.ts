@@ -10,9 +10,4 @@ export const TOAST_MESSAGES: ToastMessageData = {
     type: "SUCCESS",
     message: "성공적으로 회원가입 되었습니다.",
   },
-  /* 로그인 */
-  SUCCESS_SIGN_IN: {
-    type: "SUCCESS",
-    message: "성공적으로 로그인 되었습니다.",
-  },
 };

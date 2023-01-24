@@ -6,7 +6,7 @@ import useToast from "@/core/hooks/useToast";
 import { CommonToastContainerStyles, CommonToastStyles, TOTAL_ANIMATE_TIMES } from "./style";
 import { ToastData } from "./model";
 
-const Toast = () => {
+export const Toast = () => {
   const timeoutRef = useRef<NodeJS.Timeout>();
   const [activeToast, setActiveToast] = useState<ToastData>();
   const { toastList, removeToast } = useToast();
@@ -42,10 +42,10 @@ const Toast = () => {
     <CommonToastContainerStyles>
       {activeToast && (
         <CommonToastStyles column type={activeToast.type}>
-          <span className="common-toast-title">{activeToast.type}</span>
-          <span className="common-toast-text">{activeToast.message}</span>
+          <span className="common-toast__title">{activeToast.type}</span>
+          <span className="common-toast__text">{activeToast.message}</span>
 
-          <div className="common-toast-timer">
+          <div className="common-toast__timer">
             <div />
           </div>
         </CommonToastStyles>
@@ -53,5 +53,3 @@ const Toast = () => {
     </CommonToastContainerStyles>
   );
 };
-
-export default Toast;
