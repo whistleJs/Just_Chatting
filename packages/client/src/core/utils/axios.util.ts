@@ -5,6 +5,7 @@ import { getProdOrOther } from "./core.util";
 import { AxiosErrorResponseData } from "@/core/model/axios.model";
 
 const axiosInstance = axios.create();
+axiosInstance.defaults.timeout = 1000 * 30;
 axiosInstance.defaults.baseURL = getProdOrOther<string, string>("http://localhost:3001/api", "/api");
 axiosInstance.defaults.headers["Content-Type"] = "application/json";
 
@@ -13,9 +14,9 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log(error);
+    console.error(error);
 
-    throw error;
+    throw "FAILED_REQUEST";
   }
 );
 
