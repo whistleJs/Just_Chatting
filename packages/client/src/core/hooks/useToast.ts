@@ -1,13 +1,13 @@
 import { useAtom } from "jotai";
 
-import { TOAST_MESSAGE_TYPE } from "@/components/Toast/model";
+import { TOAST_TYPE } from "@/components/Toast/model";
 
 import { toastAtom } from "@/store/toast.store";
 
 const useToast = () => {
   const [toastList, setToastList] = useAtom(toastAtom);
 
-  const createToast = (toastType: TOAST_MESSAGE_TYPE) => {
+  const createToast = (toastType: TOAST_TYPE) => {
     setToastList((prev) => [...prev, toastType]);
   };
 
