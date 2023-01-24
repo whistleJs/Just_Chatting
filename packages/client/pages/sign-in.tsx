@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { useSetAtom } from "jotai";
 
 import AuthService from "@/api/AuthService";
 import { AuthSignInRequest } from "@/api/model/auth.model";
@@ -17,12 +19,17 @@ import useToast from "@/core/hooks/useToast";
 
 import SignLayout from "@/layouts/sign";
 
+import { tokenAtomWithStorage } from "@/store/token.store";
+
 import { Flex } from "@/styles/common/flex.style";
 import { Button } from "@/styles/components/button.style";
 import { Input } from "@/styles/components/input.style";
 import { Form } from "@/styles/layouts/sign.style";
 
 const SignInPage = () => {
+  const setToken = useSetAtom(tokenAtomWithStorage);
+  const router = useRouter();
+
   const {
     formState: { errors },
     register,
@@ -34,7 +41,9 @@ const SignInPage = () => {
 
   const onValid = async (request: AuthSignInRequest) => {
     try {
-      await AuthService.signIn(request);
+      const { accessToken } = (await AuthService.signIn(request)).data;
+
+      setToken(accessToken);
     } catch (error) {
       if (typeof error === "string") {
         switch (error as TOAST_TYPE) {
@@ -51,7 +60,7 @@ const SignInPage = () => {
       }
     }
 
-    createToast("SUCCESS_SIGN_IN");
+    router.push("/");
   };
 
   return (

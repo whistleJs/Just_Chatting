@@ -9,3 +9,14 @@ export interface AuthSignInRequest {
   email: string;
   password: string;
 }
+
+export interface AuthSignUpResponse {
+  email: string;
+  id: number;
+  name: string;
+  nickname: string;
+}
+
+export interface AuthSignInResponse {
+  accessToken: string;
+}

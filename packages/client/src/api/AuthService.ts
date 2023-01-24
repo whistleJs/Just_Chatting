@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from "axios";
 
 import axios from "@/core/utils/axios.util";
 
-import { AuthSignInRequest, AuthSignUpRequest } from "./model/auth.model";
+import { AuthSignInRequest, AuthSignInResponse, AuthSignUpRequest, AuthSignUpResponse } from "./model/auth.model";
 
 const signUp = (data: AuthSignUpRequest) => {
   const config: AxiosRequestConfig = {
@@ -11,7 +11,7 @@ const signUp = (data: AuthSignUpRequest) => {
     data,
   };
 
-  return axios.request(config);
+  return axios.request<AuthSignUpResponse>(config);
 };
 
 const signIn = (data: AuthSignInRequest) => {
@@ -21,7 +21,7 @@ const signIn = (data: AuthSignInRequest) => {
     data,
   };
 
-  return axios.request(config);
+  return axios.request<AuthSignInResponse>(config);
 };
 
 export default {
