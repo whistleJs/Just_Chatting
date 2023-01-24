@@ -1,15 +1,3 @@
-import { atom } from "jotai";
+import { atomWithStorage } from "@/core/utils/store.util";
 
-export const tokenAtom = atom<string | null>(localStorage.getItem("token") ?? null);
-export const tokenAtomWithStorage = atom(
-  (get) => get(tokenAtom),
-  (_, set, newToken: string | null) => {
-    set(tokenAtom, newToken);
-
-    if (typeof newToken === "string") {
-      localStorage.setItem("token", newToken);
-    } else {
-      localStorage.removeItem("token");
-    }
-  }
-);
+export const tokenAtom = atomWithStorage("token");
