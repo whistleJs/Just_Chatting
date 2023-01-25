@@ -17,7 +17,7 @@ import {
 } from "@/core/constants/account.constants";
 import useToast from "@/core/hooks/useToast";
 
-import SignLayout from "@/layouts/sign";
+import SignLayout, { signLayoutServerSideProps } from "@/layouts/sign";
 
 import { InputGroup } from "@/components/InputGroup";
 import { TOAST_TYPE } from "@/components/Toast/model";
@@ -25,6 +25,8 @@ import { Flex } from "@/styles/common/flex.style";
 import { Button } from "@/styles/components/button.style";
 import { Input } from "@/styles/components/input.style";
 import { Form } from "@/styles/layouts/sign.style";
+
+export const getServerSideProps = signLayoutServerSideProps;
 
 const SignUpPage = () => {
   const router = useRouter();
