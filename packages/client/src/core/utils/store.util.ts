@@ -1,9 +1,11 @@
 import { atom } from "jotai";
 
+import { getCookie, removeCookie, setCookie } from "./cookie.util";
+
 export const atomWithStorage = (key: string, initialValue: string | null = null) => {
   const baseAtom = atom(initialValue);
   baseAtom.onMount = (setValue) => {
-    setValue(localStorage.getItem(key));
+    setValue(getCookie(key));
   };
 
   const derivedAtom = atom(
@@ -12,9 +14,9 @@ export const atomWithStorage = (key: string, initialValue: string | null = null)
       set(baseAtom, newToken);
 
       if (typeof newToken === "string") {
-        localStorage.setItem(key, newToken);
+        setCookie(key, newToken);
       } else {
-        localStorage.removeItem(key);
+        removeCookie(key);
       }
     }
   );
