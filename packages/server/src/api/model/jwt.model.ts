@@ -4,7 +4,7 @@ export interface JwtPayload {
 }
 
 export interface JwtVerify {
-  id: number;
+  sub: number;
   email: string;
   iat: number;
   exp: number;
