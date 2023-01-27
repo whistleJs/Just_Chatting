@@ -15,12 +15,16 @@ import {
   SignUpResponse,
   SignInResponse,
 } from '@/api/model/response/auth.response';
+import Status from '@/api/model/entity/Status.entity';
+import StatusRepository from '@/api/repository/status.repository';
 
 @Injectable()
 export default class AuthService {
   constructor(
     private readonly jwtService: JwtService,
     @InjectRepository(Users) private readonly userRepository: UserRepository,
+    @InjectRepository(Status)
+    private readonly statusRepository: StatusRepository,
   ) {}
 
   /**
@@ -49,7 +53,11 @@ export default class AuthService {
     request.password = await bcrypt.hash(request.password, 8);
 
     try {
+      // 신규 유저 생성
       user = await this.userRepository.save(request);
+
+      // 유저 접속 상태 생성
+      await this.statusRepository.save({ user });
     } catch (e) {
       if (e instanceof QueryFailedError) {
         throw new BadRequestException(e.message);
