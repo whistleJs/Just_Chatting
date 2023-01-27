@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 import BaseEntity from './Base.entity';
 import Users from './Users.entity';
@@ -11,8 +17,8 @@ class Status extends BaseEntity {
   @Column('boolean', { default: false, nullable: false })
   isOnline: boolean;
 
-  @ManyToOne(() => Users)
-  @Column('int', { name: 'user_id', nullable: false })
+  @OneToOne(() => Users, { cascade: true })
+  @JoinColumn()
   user: Users;
 }
 
