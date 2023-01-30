@@ -10,6 +10,7 @@ import { Server, Socket } from 'socket.io';
 import StatusService from '@/api/service/status.service';
 import { JwtVerify } from '@/api/model/jwt.model';
 import UserService from '@/api/service/user.service';
+import { StatusSocketResponse } from '@/api/model/response/status.response';
 
 @WebSocketGateway(8000, {
   transports: ['websocket'],
@@ -38,22 +39,44 @@ export default class SocketGateway
   /**
    * Connect Socket
    */
-  async handleConnection(client: Socket) {
-    const user = await this.getUserByToken(client.handshake.auth.token);
+  async handleConnection(socket: Socket) {
+    const user = await this.getUserByToken(socket.handshake.auth.token);
 
     if (!user) return;
 
     await this.statusService.updateByUserId({ user, isOnline: true });
+
+    this.handleStatusList();
   }
 
   /**
    * Disconnect Socket
    */
-  async handleDisconnect(client: Socket) {
-    const user = await this.getUserByToken(client.handshake.auth.token);
+  async handleDisconnect(socket: Socket) {
+    const user = await this.getUserByToken(socket.handshake.auth.token);
 
     if (!user) return;
 
     await this.statusService.updateByUserId({ user, isOnline: false });
+
+    this.handleStatusList();
+  }
+
+  /**
+   * Send user status list to Client
+   */
+  async handleStatusList() {
+    const statusList: StatusSocketResponse[] = (
+      await this.statusService.findAll()
+    ).map(({ isOnline, updatedAt, user: { id, nickname } }) => {
+      return {
+        id,
+        nickname,
+        isOnline,
+        updatedAt,
+      };
+    });
+
+    this.server.emit('/status-list', statusList);
   }
 }

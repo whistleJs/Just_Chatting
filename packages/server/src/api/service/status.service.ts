@@ -18,6 +18,10 @@ export default class StatusService {
     private readonly statusRepository: StatusRepository,
   ) {}
 
+  async findAll() {
+    return this.statusRepository.find({ relations: { user: true } });
+  }
+
   async findByUser(user: Users) {
     try {
       return this.statusRepository.findOne({
