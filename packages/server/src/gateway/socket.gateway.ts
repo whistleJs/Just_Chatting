@@ -9,11 +9,13 @@ import { Cron } from '@nestjs/schedule';
 import { UseGuards } from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
 
+import { SocketGaurd } from '@/guard/socket.guard';
+
 import StatusService from '@/api/service/status.service';
 import UserService from '@/api/service/user.service';
+
 import { JwtVerify } from '@/api/model/jwt.model';
 import { StatusSocketResponse } from '@/api/model/response/status.response';
-import { SocketGaurd } from '@/guard/socket.guard';
 
 @WebSocketGateway(8000, {
   transports: ['websocket'],
@@ -49,8 +51,6 @@ export default class SocketGateway
     if (!user) return;
 
     await this.statusService.updateByUserId({ user, isOnline: true });
-
-    this.handleStatusList();
   }
 
   /**
@@ -63,8 +63,6 @@ export default class SocketGateway
     if (!user) return;
 
     await this.statusService.updateByUserId({ user, isOnline: false });
-
-    this.handleStatusList();
   }
 
   /**
