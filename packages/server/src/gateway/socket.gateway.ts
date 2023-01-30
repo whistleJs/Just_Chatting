@@ -51,6 +51,8 @@ export default class SocketGateway
     if (!user) return;
 
     await this.statusService.updateByUserId({ user, isOnline: true });
+
+    this.handleStatusList();
   }
 
   /**
