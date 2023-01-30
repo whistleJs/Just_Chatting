@@ -4,7 +4,7 @@ import io, { Socket } from "socket.io-client";
 
 import { tokenAtom } from "@/store/token.store";
 
-const useSocket = (url: string) => {
+const useSocket = () => {
   const token = useAtomValue(tokenAtom);
   const [socket, setSocket] = useState<Socket | null>(null);
 
@@ -17,7 +17,7 @@ const useSocket = (url: string) => {
   useEffect(() => {
     if (token) {
       setSocket(
-        io(url, {
+        io("ws://localhost:8000", {
           autoConnect: false,
           auth: { token },
           transports: ["websocket"],
