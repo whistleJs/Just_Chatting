@@ -8,6 +8,7 @@
   },
   "packageManager": "yarn@3.3.0",
   "devDependencies": {
+    "@types/cron": "^2.0.0",
     "eslint": "^8.30.0",
     "prettier": "^2.8.1",
     "typescript": "^4.9.4"
@@ -18,5 +19,8 @@
     "client:dev": "yarn workspace:client dev",
     "server:dev": "yarn workspace:server start:dev",
     "test:all": "yarn workspace foreach --parallel run test"
+  },
+  "dependencies": {
+    "@nestjs/schedule": "^2.1.0"
   }
 }
