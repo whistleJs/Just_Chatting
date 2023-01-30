@@ -1,6 +1,7 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { ScheduleModule } from '@nestjs/schedule';
 
 import TypeOrmConfig from '@/config/typeorm.config';
 import SocketGateway from '@/gateway/socket.gateway';
@@ -21,6 +22,7 @@ import UserModule from '@/api/module/user.module';
   imports: [
     TypeOrmConfig,
     TypeOrmModule.forFeature([Status, Users]),
+    ScheduleModule.forRoot(),
     AuthModule,
     UserModule,
   ],

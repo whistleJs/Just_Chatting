@@ -11,6 +11,7 @@ import StatusService from '@/api/service/status.service';
 import { JwtVerify } from '@/api/model/jwt.model';
 import UserService from '@/api/service/user.service';
 import { StatusSocketResponse } from '@/api/model/response/status.response';
+import { Cron } from '@nestjs/schedule';
 
 @WebSocketGateway(8000, {
   transports: ['websocket'],
@@ -65,6 +66,7 @@ export default class SocketGateway
   /**
    * Send user status list to Client
    */
+  @Cron('0 * * * * *')
   async handleStatusList() {
     const statusList: StatusSocketResponse[] = (
       await this.statusService.findAll()
