@@ -5,13 +5,15 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
+import { Cron } from '@nestjs/schedule';
+import { UseGuards } from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
 
 import StatusService from '@/api/service/status.service';
-import { JwtVerify } from '@/api/model/jwt.model';
 import UserService from '@/api/service/user.service';
+import { JwtVerify } from '@/api/model/jwt.model';
 import { StatusSocketResponse } from '@/api/model/response/status.response';
-import { Cron } from '@nestjs/schedule';
+import { SocketGaurd } from '@/guard/socket.guard';
 
 @WebSocketGateway(8000, {
   transports: ['websocket'],
@@ -40,6 +42,7 @@ export default class SocketGateway
   /**
    * Connect Socket
    */
+  @UseGuards(SocketGaurd)
   async handleConnection(socket: Socket) {
     const user = await this.getUserByToken(socket.handshake.auth.token);
 
@@ -53,6 +56,7 @@ export default class SocketGateway
   /**
    * Disconnect Socket
    */
+  @UseGuards(SocketGaurd)
   async handleDisconnect(socket: Socket) {
     const user = await this.getUserByToken(socket.handshake.auth.token);
 
@@ -66,6 +70,7 @@ export default class SocketGateway
   /**
    * Send user status list to Client
    */
+  @UseGuards(SocketGaurd)
   @Cron('0 * * * * *')
   async handleStatusList() {
     const statusList: StatusSocketResponse[] = (
