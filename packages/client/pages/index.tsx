@@ -7,7 +7,19 @@ import useSocket from "@/core/hooks/useSocket";
 import { diffTime } from "@/core/utils/date.util";
 
 import { Flex } from "@/styles/common/flex.style";
-import { ChatBox, Container, StatusBox, StatusItem, StatusItemCircle } from "@/styles/pages/index.style";
+import {
+  ChatBox,
+  ChatBoxContainer,
+  ChatBoxContent,
+  ChatBoxGroup,
+  ChatBoxInput,
+  ChatBoxProfile,
+  ChatBoxProfileName,
+  Container,
+  StatusBox,
+  StatusItem,
+  StatusItemCircle,
+} from "@/styles/pages/index.style";
 
 export const getServerSideProps: GetServerSideProps = async ({ req: { cookies } }) => {
   if (cookies.token === undefined) {
@@ -46,7 +58,28 @@ const IndexPage = () => {
 
   return (
     <Container alignItems="center" justifyContent="center">
-      <ChatBox></ChatBox>
+      <ChatBox column>
+        <ChatBoxContainer auto gap="8px" alignItems="flex-end">
+          {/* 상대방 */}
+          <ChatBoxGroup gap="8px" alignItems="flex-start">
+            <ChatBoxProfile />
+
+            <Flex auto column gap="8px">
+              <ChatBoxProfileName>정성휘</ChatBoxProfileName>
+              <ChatBoxContent style={{ backgroundColor: "purple" }}>text</ChatBoxContent>
+              <ChatBoxContent style={{ backgroundColor: "purple" }}>text</ChatBoxContent>
+            </Flex>
+          </ChatBoxGroup>
+
+          {/* 나 */}
+          <ChatBoxGroup column gap="8px" alignItems="flex-end">
+            <ChatBoxContent style={{ backgroundColor: "orange" }}>text</ChatBoxContent>
+            <ChatBoxContent style={{ backgroundColor: "orange" }}>text</ChatBoxContent>
+          </ChatBoxGroup>
+        </ChatBoxContainer>
+
+        <ChatBoxInput rows={4} />
+      </ChatBox>
 
       <StatusBox column gap="15px">
         {statusList.map((status) => (

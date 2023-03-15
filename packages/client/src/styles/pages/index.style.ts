@@ -17,6 +17,7 @@ const StatusItemAnimation = keyframes`
   }
 `;
 
+// Styles
 export const Container = styled(Flex)`
   width: 100vw;
   height: 100vh;
@@ -27,13 +28,60 @@ export const Container = styled(Flex)`
   }
 `;
 
+// <chat-box>
 export const ChatBox = styled(Flex)`
   width: 400px;
   background-color: white;
   border-radius: 16px;
   box-shadow: 0 16px 8px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
 `;
 
+export const ChatBoxContainer = styled(Flex)`
+  flex-direction: column-reverse;
+  padding: 16px;
+  width: 100%;
+  height: calc(100% - 109.34px);
+  overflow-y: auto;
+`;
+
+export const ChatBoxGroup = styled(Flex)`
+  width: 100%;
+`;
+
+export const ChatBoxProfile = styled(Flex)`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: ${ThemeColors.gray.default};
+`;
+
+export const ChatBoxProfileName = styled.span`
+  font-size: 12px;
+  font-weight: 500;
+  color: ${ThemeColors.gray.default};
+`;
+
+export const ChatBoxContent = styled(Flex)`
+  padding: 8px 12px;
+  max-width: 60%;
+  border-radius: 6px;
+  font-size: 14px;
+`;
+
+export const ChatBoxInput = styled.textarea`
+  padding: 16px;
+  width: 100%;
+  font-size: 14px;
+  border: none;
+  border-radius: 0px;
+  background-color: ${ThemeColors.main.active};
+  color: white;
+  line-height: 20px;
+  resize: none;
+`;
+
+// <status-box>
 export const StatusBox = styled(Flex)`
   width: 200px;
 `;
