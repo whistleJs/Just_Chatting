@@ -18,6 +18,7 @@ import StatusService from '@/api/service/status.service';
 import UserService from '@/api/service/user.service';
 
 import AuthModule from '@/api/module/auth.module';
+import ChatHistoryModule from '@/api/module/chatHistory.module';
 import UserModule from '@/api/module/user.module';
 
 @Module({
@@ -26,6 +27,7 @@ import UserModule from '@/api/module/user.module';
     TypeOrmModule.forFeature([Chat, Status, Users]),
     ScheduleModule.forRoot(),
     AuthModule,
+    ChatHistoryModule,
     UserModule,
   ],
   providers: [
