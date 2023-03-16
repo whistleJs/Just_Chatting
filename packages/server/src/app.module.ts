@@ -9,9 +9,11 @@ import AuthMiddleware from '@/api/middleware/auth.middleware';
 
 import UserController from '@/api/controller/user.controller';
 
+import Chat from '@/api/model/entity/ChatHistory.entity';
 import Status from '@/api/model/entity/Status.entity';
 import Users from '@/api/model/entity/Users.entity';
 
+import ChatService from '@/api/service/chatHistory.service';
 import StatusService from '@/api/service/status.service';
 import UserService from '@/api/service/user.service';
 
@@ -21,12 +23,18 @@ import UserModule from '@/api/module/user.module';
 @Module({
   imports: [
     TypeOrmConfig,
-    TypeOrmModule.forFeature([Status, Users]),
+    TypeOrmModule.forFeature([Chat, Status, Users]),
     ScheduleModule.forRoot(),
     AuthModule,
     UserModule,
   ],
-  providers: [JwtService, StatusService, UserService, SocketGateway],
+  providers: [
+    JwtService,
+    ChatService,
+    StatusService,
+    UserService,
+    SocketGateway,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
