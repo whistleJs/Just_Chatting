@@ -19,10 +19,12 @@ export default class StatusService {
   ) {}
 
   async findAll() {
-    return this.statusRepository.find({
-      relations: { user: true },
-      order: { isOnline: 'DESC', id: 'ASC' },
-    });
+    return (
+      await this.statusRepository.find({
+        relations: { user: true },
+        order: { isOnline: 'DESC', id: 'ASC' },
+      })
+    ).filter((item) => item.user !== null);
   }
 
   async findByUser(user: Users) {
