@@ -4,13 +4,19 @@ import {
   WebSocketServer,
   OnGatewayConnection,
   OnGatewayDisconnect,
+  SubscribeMessage,
 } from '@nestjs/websockets';
 import { Cron } from '@nestjs/schedule';
-import { UseGuards } from '@nestjs/common';
+import {
+  BadRequestException,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
 
 import { SocketGaurd } from '@/guard/socket.guard';
 
+import ChatHistoryService from '@/api/service/chatHistory.service';
 import StatusService from '@/api/service/status.service';
 import UserService from '@/api/service/user.service';
 
@@ -26,6 +32,7 @@ export default class SocketGateway
 {
   constructor(
     private readonly jwtService: JwtService,
+    private readonly chatHistoryService: ChatHistoryService,
     private readonly statusService: StatusService,
     private readonly userService: UserService,
   ) {}
@@ -85,5 +92,23 @@ export default class SocketGateway
     });
 
     this.server.emit('/status-list', statusList);
+  }
+
+  /**
+   * Receive message by client - /chat/message
+   */
+  @UseGuards(SocketGaurd)
+  @SubscribeMessage('/chat/message')
+  async handleReceiveMessageByClient(client: Socket, message: string) {
+    const user = await this.getUserByToken(client.handshake.auth.token);
+
+    if (user) {
+      const chatHistory = await this.chatHistoryService.create({
+        user,
+        message,
+      });
+
+      console.log(chatHistory);
+    }
   }
 }
