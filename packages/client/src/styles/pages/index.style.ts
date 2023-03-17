@@ -38,7 +38,6 @@ export const ChatBox = styled(Flex)`
 `;
 
 export const ChatBoxContainer = styled(Flex)`
-  flex-direction: column-reverse;
   padding: 16px;
   width: 100%;
   height: calc(100% - 109.34px);
@@ -66,10 +65,11 @@ export const ChatBoxContent = styled(Flex)`
   padding: 8px 12px;
   max-width: 60%;
   border-radius: 6px;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.16);
   font-size: 14px;
 `;
 
-export const ChatBoxInput = styled.textarea`
+export const ChatBoxTextarea = styled.textarea`
   padding: 16px;
   width: 100%;
   font-size: 14px;
