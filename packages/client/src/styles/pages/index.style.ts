@@ -93,6 +93,23 @@ export const ChatBoxTextarea = styled.textarea`
   resize: none;
 `;
 
+export const ChatBoxLogoutButton = styled.button`
+  margin-top: 12px;
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  background-color: ${ThemeColors.red.default};
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+
+  &:focus {
+    background-color: ${ThemeColors.red.default};
+  }
+`;
+
 // <status-box>
 export const StatusBox = styled(Flex)`
   width: 220px;

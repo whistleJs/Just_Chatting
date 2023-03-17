@@ -1,7 +1,8 @@
 import dayjs from "dayjs";
 import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
 import { ComponentProps, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 
 import { StatusResponse } from "@/api/model/socket.model";
 import useSocket from "@/core/hooks/useSocket";
@@ -15,6 +16,7 @@ import {
   ChatBoxContent,
   ChatBoxContentTime,
   ChatBoxGroup,
+  ChatBoxLogoutButton,
   ChatBoxProfile,
   ChatBoxProfileName,
   ChatBoxTextarea,
@@ -47,7 +49,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req: { cookies } 
 };
 
 const IndexPage = () => {
-  const token = useAtomValue(tokenAtom);
+  const [token, setToken] = useAtom(tokenAtom);
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const socket = useSocket();
@@ -137,6 +140,12 @@ const IndexPage = () => {
     }
   };
 
+  const handleClickLogoutButton = () => {
+    setToken(null);
+
+    router.push("/sign-in");
+  };
+
   useEffect(() => {
     containerRef.current?.scroll(0, chatHistoryList.length * 10000);
   }, [chatHistoryList, containerRef]);
@@ -205,6 +214,8 @@ const IndexPage = () => {
             />
           )}
         </ChatBox>
+
+        <ChatBoxLogoutButton onClick={handleClickLogoutButton}>로그아웃</ChatBoxLogoutButton>
       </Flex>
 
       <StatusBox column gap="15px">
