@@ -22,16 +22,12 @@ export const Container = styled(Flex)`
   width: 100vw;
   height: 100vh;
   gap: 30px;
-
-  & > div {
-    height: 700px;
-  }
 `;
 
 // <chat-box>
 export const ChatBox = styled(Flex)`
   width: 450px;
-  height: 100%;
+  height: 700px;
   background-color: white;
   border-radius: 16px;
   box-shadow: 0 16px 8px rgba(0, 0, 0, 0.16);
@@ -113,6 +109,8 @@ export const ChatBoxLogoutButton = styled.button`
 // <status-box>
 export const StatusBox = styled(Flex)`
   width: 220px;
+  max-height: 700px;
+  overflow-y: auto;
 `;
 
 export const StatusItemCircle = styled.div<{ active: boolean }>(({ active }) => ({

@@ -125,6 +125,29 @@ const IndexPage = () => {
     setMessage(value);
   };
 
+  const handlePasteTextarea: ComponentProps<"textarea">["onPaste"] = (event) => {
+    const { files } = event.clipboardData;
+
+    if (files.length !== 1) return;
+
+    const file = files[0];
+
+    if (!/^image\/(.+)/g.test(file.type)) return;
+    if (file.size > 1024 * 1024 * 300) return;
+
+    event.preventDefault();
+
+    const reader = new FileReader();
+
+    reader.onload = (result) => {
+      if (result.target) {
+        console.log(result.target.result);
+      }
+    };
+
+    reader.readAsDataURL(file);
+  };
+
   const handleKeydownTextarea: ComponentProps<"textarea">["onKeyDown"] = (event) => {
     if (event.nativeEvent.isComposing) return;
     if (event.key === "Enter") {
@@ -210,6 +233,7 @@ const IndexPage = () => {
               rows={4}
               value={message}
               onChange={handleChangeTextarea}
+              onPaste={handlePasteTextarea}
               onKeyDown={handleKeydownTextarea}
             />
           )}
