@@ -13,6 +13,7 @@ import {
   ChatBox,
   ChatBoxContainer,
   ChatBoxContent,
+  ChatBoxContentTime,
   ChatBoxGroup,
   ChatBoxProfile,
   ChatBoxProfileName,
@@ -100,12 +101,9 @@ const IndexPage = () => {
     setChatHistoryList(data);
   }, []);
 
-  const handleChatMessage = useCallback(
-    (chatHistory: ChatHistoryResponse) => {
-      setChatHistoryList([...chatHistoryList, chatHistory]);
-    },
-    [chatHistoryList]
-  );
+  const handleChatMessage = useCallback((chatHistory: ChatHistoryResponse) => {
+    setChatHistoryList((prev) => [...prev, chatHistory]);
+  }, []);
 
   const handleUserStatus = useCallback((statusList: StatusResponse[]) => {
     setStatusList(
@@ -125,6 +123,7 @@ const IndexPage = () => {
   };
 
   const handleKeydownTextarea: ComponentProps<"textarea">["onKeyDown"] = (event) => {
+    if (event.nativeEvent.isComposing) return;
     if (event.key === "Enter") {
       if (message.trim() === "") return;
 
@@ -139,7 +138,7 @@ const IndexPage = () => {
   };
 
   useEffect(() => {
-    containerRef.current?.scroll(0, chatHistoryList.length * 40);
+    containerRef.current?.scroll(0, chatHistoryList.length * 10000);
   }, [chatHistoryList, containerRef]);
 
   useEffect(() => {
@@ -150,40 +149,57 @@ const IndexPage = () => {
 
   return (
     <Container alignItems="center" justifyContent="center">
-      <ChatBox column>
-        <ChatBoxContainer ref={containerRef} auto column gap="8px" alignItems="flex-end">
-          {viewChatHistoryList.map((group, groupIndex) => (
-            <ChatBoxGroup
-              key={groupIndex}
-              gap="8px"
-              column={group.user?.id === userId ? true : false}
-              alignItems={group.user?.id === userId ? "flex-end" : "flex-start"}
-            >
-              {group.user?.id === userId ? (
-                group.historyList.map((history) => (
-                  <ChatBoxContent key={history.id} style={{ backgroundColor: "orange" }}>
-                    {history.message}
-                  </ChatBoxContent>
-                ))
-              ) : (
-                <>
-                  <ChatBoxProfile />
+      <Flex column>
+        <ChatBox column>
+          <ChatBoxContainer ref={containerRef} auto column alignItems="flex-end">
+            {viewChatHistoryList.map((group, groupIndex) => (
+              <ChatBoxGroup
+                key={groupIndex}
+                gap="8px"
+                column={group.user?.id === userId ? true : false}
+                alignItems={group.user?.id === userId ? "flex-end" : "flex-start"}
+              >
+                {group.user?.id === userId ? (
+                  group.historyList.map((history) => (
+                    // 나
+                    <Flex key={history.id} gap="4px" alignItems="flex-end">
+                      <ChatBoxContentTime>{dayjs(history.createdAt).format("HH:mm:ss")}</ChatBoxContentTime>
+                      <ChatBoxContent style={{ backgroundColor: "#ffd61e" }}>{history.message}</ChatBoxContent>
+                    </Flex>
+                  ))
+                ) : (
+                  // 상대방
+                  <>
+                    <ChatBoxProfile alignItems="center" justifyContent="center">
+                      {group.user?.nickname[0] || "-"}
+                    </ChatBoxProfile>
 
-                  <Flex auto column gap="8px" alignItems="flex-start">
-                    <ChatBoxProfileName>{group.user?.name || "(알수 없음)"}</ChatBoxProfileName>
+                    <Flex auto column gap="8px" alignItems="flex-start">
+                      <ChatBoxProfileName>{group.user?.nickname || "(알수 없음)"}</ChatBoxProfileName>
 
-                    {group.historyList.map((history) => (
-                      <ChatBoxContent key={history.id}>{history.message}</ChatBoxContent>
-                    ))}
-                  </Flex>
-                </>
-              )}
-            </ChatBoxGroup>
-          ))}
-        </ChatBoxContainer>
+                      {group.historyList.map((history) => (
+                        <Flex key={history.id} gap="4px" alignItems="flex-end" style={{ width: "100%" }}>
+                          <ChatBoxContent>{history.message}</ChatBoxContent>
+                          <ChatBoxContentTime>{dayjs(history.createdAt).format("HH:mm:ss")}</ChatBoxContentTime>
+                        </Flex>
+                      ))}
+                    </Flex>
+                  </>
+                )}
+              </ChatBoxGroup>
+            ))}
+          </ChatBoxContainer>
 
-        <ChatBoxTextarea rows={4} value={message} onChange={handleChangeTextarea} onKeyDown={handleKeydownTextarea} />
-      </ChatBox>
+          {userId !== -1 && (
+            <ChatBoxTextarea
+              rows={4}
+              value={message}
+              onChange={handleChangeTextarea}
+              onKeyDown={handleKeydownTextarea}
+            />
+          )}
+        </ChatBox>
+      </Flex>
 
       <StatusBox column gap="15px">
         {statusList.map((status) => (

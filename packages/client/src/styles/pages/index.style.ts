@@ -24,13 +24,14 @@ export const Container = styled(Flex)`
   gap: 30px;
 
   & > div {
-    height: 600px;
+    height: 700px;
   }
 `;
 
 // <chat-box>
 export const ChatBox = styled(Flex)`
-  width: 400px;
+  width: 450px;
+  height: 100%;
   background-color: white;
   border-radius: 16px;
   box-shadow: 0 16px 8px rgba(0, 0, 0, 0.16);
@@ -45,14 +46,19 @@ export const ChatBoxContainer = styled(Flex)`
 `;
 
 export const ChatBoxGroup = styled(Flex)`
+  margin-top: 12px;
   width: 100%;
 `;
 
 export const ChatBoxProfile = styled(Flex)`
+  flex: none;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   background-color: ${ThemeColors.gray.default};
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
 `;
 
 export const ChatBoxProfileName = styled.span`
@@ -67,6 +73,12 @@ export const ChatBoxContent = styled(Flex)`
   border-radius: 6px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.16);
   font-size: 14px;
+  white-space: break-spaces;
+`;
+
+export const ChatBoxContentTime = styled.span`
+  font-size: 10px;
+  color: ${ThemeColors.gray.default};
 `;
 
 export const ChatBoxTextarea = styled.textarea`
@@ -83,7 +95,7 @@ export const ChatBoxTextarea = styled.textarea`
 
 // <status-box>
 export const StatusBox = styled(Flex)`
-  width: 200px;
+  width: 220px;
 `;
 
 export const StatusItemCircle = styled.div<{ active: boolean }>(({ active }) => ({
@@ -95,7 +107,7 @@ export const StatusItemCircle = styled.div<{ active: boolean }>(({ active }) => 
 }));
 
 export const StatusItem = styled(Flex)`
-  padding: 10px 12px;
+  padding: 12px;
   width: 100%;
   background-color: white;
   border-radius: 4px;
