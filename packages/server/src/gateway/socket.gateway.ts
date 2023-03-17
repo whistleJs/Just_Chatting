@@ -110,7 +110,7 @@ export default class SocketGateway
         message,
       });
 
-      console.log(chatHistory);
+      this.server.emit('/chat/message', chatHistory);
     }
   }
 }
