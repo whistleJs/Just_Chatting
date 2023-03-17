@@ -72,7 +72,7 @@ const IndexPage = () => {
     chatHistoryList.forEach((chatHistory) => {
       if (
         group === null ||
-        (group.user === null && chatHistory.user === null) ||
+        (group.user === null && chatHistory.user !== null) ||
         (group.user !== null && (chatHistory.user === null || group.user.id !== chatHistory.user.id))
       ) {
         if (group !== null) {
@@ -162,7 +162,13 @@ const IndexPage = () => {
                 {group.user?.id === userId ? (
                   group.historyList.map((history) => (
                     // 나
-                    <Flex key={history.id} gap="4px" alignItems="flex-end">
+                    <Flex
+                      key={history.id}
+                      gap="4px"
+                      alignItems="flex-end"
+                      justifyContent="flex-end"
+                      style={{ width: "100%" }}
+                    >
                       <ChatBoxContentTime>{dayjs(history.createdAt).format("HH:mm:ss")}</ChatBoxContentTime>
                       <ChatBoxContent style={{ backgroundColor: "#ffd61e" }}>{history.message}</ChatBoxContent>
                     </Flex>
