@@ -7,11 +7,7 @@ import {
   SubscribeMessage,
 } from '@nestjs/websockets';
 import { Cron } from '@nestjs/schedule';
-import {
-  BadRequestException,
-  UnauthorizedException,
-  UseGuards,
-} from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { Server, Socket } from 'socket.io';
 
 import { SocketGaurd } from '@/guard/socket.guard';
@@ -72,8 +68,6 @@ export default class SocketGateway
     if (!user) return;
 
     await this.statusService.updateByUserId({ user, isOnline: false });
-
-    this.handleStatusList();
   }
 
   /**
