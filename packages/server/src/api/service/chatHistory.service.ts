@@ -30,24 +30,29 @@ export default class ChatHistoryService {
     return (
       await this.chatHistoryRepository.find({
         relations: { user: true },
+        order: { createdAt: 'DESC' },
+        take: 50,
+        skip: 0,
       })
-    ).map(({ id, message, createdAt, user }) => {
-      const result: ChatHistoryResponse = {
-        id,
-        message,
-        createdAt,
-        user: null,
-      };
-
-      if (user) {
-        result.user = {
-          id: user.id,
-          name: user.name,
-          nickname: user.nickname,
+    )
+      .map(({ id, message, createdAt, user }) => {
+        const result: ChatHistoryResponse = {
+          id,
+          message,
+          createdAt,
+          user: null,
         };
-      }
 
-      return result;
-    });
+        if (user) {
+          result.user = {
+            id: user.id,
+            name: user.name,
+            nickname: user.nickname,
+          };
+        }
+
+        return result;
+      })
+      .reverse();
   }
 }
