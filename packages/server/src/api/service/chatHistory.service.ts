@@ -6,6 +6,7 @@ import ChatHistoryRepository from '@/api/repository/chatHistory.repository';
 import ChatHistory from '@/api/model/entity/ChatHistory.entity';
 import { CreateRequest } from '@/api/model/request/chatHistory.request';
 import { ChatHistoryResponse } from '@/api/model/response/chatHistory.response';
+import { ChatHistoryType } from '@/api/model/enum/ChatHistory.enum';
 
 @Injectable()
 export default class ChatHistoryService {
@@ -17,11 +18,12 @@ export default class ChatHistoryService {
   async create({
     user,
     message,
+    type = ChatHistoryType.TEXT,
   }: CreateRequest): Promise<DeepPartial<ChatHistory>> {
     if (!user) return;
 
     return await this.chatHistoryRepository.save(
-      { user, message },
+      { user, message, type },
       { transaction: true },
     );
   }
@@ -35,10 +37,11 @@ export default class ChatHistoryService {
         skip: 0,
       })
     )
-      .map(({ id, message, createdAt, user }) => {
+      .map(({ id, message, type, createdAt, user }) => {
         const result: ChatHistoryResponse = {
           id,
           message,
+          type,
           createdAt,
           user: null,
         };

@@ -95,13 +95,17 @@ export default class SocketGateway
    */
   @UseGuards(SocketGaurd)
   @SubscribeMessage('/chat/message')
-  async handleReceiveMessageByClient(client: Socket, message: string) {
+  async handleReceiveMessageByClient(
+    client: Socket,
+    { message, type }: { message: string; type: ChatHistoryType },
+  ) {
     const user = await this.getUserByToken(client.handshake.auth.token);
 
     if (user) {
       const chatHistory = await this.chatHistoryService.create({
         user,
         message,
+        type,
       });
 
       this.server.emit('/chat/message', chatHistory);
