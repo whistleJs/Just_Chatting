@@ -139,9 +139,9 @@ const IndexPage = () => {
 
     const reader = new FileReader();
 
-    reader.onload = (result) => {
-      if (result.target) {
-        console.log(result.target.result);
+    reader.onload = (event) => {
+      if (event.target) {
+        socket?.emit("/chat/message", { message: event.target.result, type: "IMAGE" });
       }
     };
 
@@ -156,7 +156,7 @@ const IndexPage = () => {
       if (!event.shiftKey) {
         event.preventDefault();
 
-        socket?.emit("/chat/message", message);
+        socket?.emit("/chat/message", { message, type: "TEXT" });
 
         setMessage("");
       }
@@ -202,7 +202,13 @@ const IndexPage = () => {
                       style={{ width: "100%" }}
                     >
                       <ChatBoxContentTime>{dayjs(history.createdAt).format("HH:mm:ss")}</ChatBoxContentTime>
-                      <ChatBoxContent style={{ backgroundColor: "#ffd61e" }}>{history.message}</ChatBoxContent>
+                      <ChatBoxContent style={{ backgroundColor: "#ffd61e" }}>
+                        {history.type === "TEXT" ? (
+                          history.message
+                        ) : (
+                          <img src={history.message} width={200} height="auto" />
+                        )}
+                      </ChatBoxContent>
                     </Flex>
                   ))
                 ) : (
@@ -217,7 +223,13 @@ const IndexPage = () => {
 
                       {group.historyList.map((history) => (
                         <Flex key={history.id} gap="4px" alignItems="flex-end" style={{ width: "100%" }}>
-                          <ChatBoxContent>{history.message}</ChatBoxContent>
+                          <ChatBoxContent>
+                            {history.type === "TEXT" ? (
+                              history.message
+                            ) : (
+                              <img src={history.message} width={200} height="auto" />
+                            )}
+                          </ChatBoxContent>
                           <ChatBoxContentTime>{dayjs(history.createdAt).format("HH:mm:ss")}</ChatBoxContentTime>
                         </Flex>
                       ))}

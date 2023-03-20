@@ -1,3 +1,5 @@
+export type ChatHistoryType = "TEXT" | "IMAGE";
+
 export interface ChatHistoryUserResponse {
   id: number;
   nickname: string;
@@ -7,6 +9,7 @@ export interface ChatHistoryUserResponse {
 export interface ChatHistoryResponse {
   id: number;
   message: string;
+  type: ChatHistoryType;
   createdAt: Date;
   user: ChatHistoryUserResponse | null;
 }
