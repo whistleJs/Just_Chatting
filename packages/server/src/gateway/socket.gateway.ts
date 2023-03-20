@@ -18,6 +18,7 @@ import UserService from '@/api/service/user.service';
 
 import { JwtVerify } from '@/api/model/jwt.model';
 import { StatusSocketResponse } from '@/api/model/response/status.response';
+import { ChatHistoryType } from '@/api/model/enum/ChatHistory.enum';
 
 @WebSocketGateway(8000, {
   transports: ['websocket'],
