@@ -2,9 +2,12 @@ import dayjs from "dayjs";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { ComponentProps, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 
+import ChatHistoryService from "@/api/ChatHistoryService";
 import { StatusResponse } from "@/api/model/socket.model";
+import { ChatHistoryResponse } from "@/api/model/chatHistory.model";
+import { ChatTextGroup, ChatTextGroupData } from "@/components/ChatTextGroup";
 import useSocket from "@/core/hooks/useSocket";
 import { diffTime } from "@/core/utils/date.util";
 import { tokenAtom } from "@/store/token.store";
@@ -13,25 +16,13 @@ import { Flex } from "@/styles/common/flex.style";
 import {
   ChatBox,
   ChatBoxContainer,
-  ChatBoxContent,
-  ChatBoxContentTime,
-  ChatBoxGroup,
   ChatBoxLogoutButton,
-  ChatBoxProfile,
-  ChatBoxProfileName,
   ChatBoxTextarea,
   Container,
   StatusBox,
   StatusItem,
   StatusItemCircle,
 } from "@/styles/pages/index.style";
-import ChatHistoryService from "@/api/ChatHistoryService";
-import { ChatHistoryResponse, ChatHistoryUserResponse } from "@/api/model/chatHistory.model";
-
-interface ViewChatHistoryGroup {
-  user: ChatHistoryUserResponse | null;
-  historyList: ChatHistoryResponse[];
-}
 
 export const getServerSideProps: GetServerSideProps = async ({ req: { cookies } }) => {
   if (cookies.token === undefined) {
@@ -49,28 +40,18 @@ export const getServerSideProps: GetServerSideProps = async ({ req: { cookies } 
 };
 
 const IndexPage = () => {
-  const [token, setToken] = useAtom(tokenAtom);
+  const setToken = useSetAtom(tokenAtom);
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const socket = useSocket();
-
   const [message, setMessage] = useState("");
   const [chatHistoryList, setChatHistoryList] = useState<ChatHistoryResponse[]>([]);
   const [statusList, setStatusList] = useState<StatusResponse[]>([]);
 
-  const userId = useMemo(() => {
-    if (token === null) return -1;
-
-    const data = token.split(".")[1];
-    const jsonData = JSON.parse(Buffer.from(data, "base64").toString("ascii"));
-
-    return jsonData.sub;
-  }, [token]);
-
   const viewChatHistoryList = useMemo(() => {
-    const result: ViewChatHistoryGroup[] = [];
-    let group: ViewChatHistoryGroup | null = null;
+    const result: ChatTextGroupData[] = [];
+    let group: ChatTextGroupData | null = null;
 
     chatHistoryList.forEach((chatHistory) => {
       if (
@@ -177,6 +158,12 @@ const IndexPage = () => {
     socket?.on("connect", handleConnectSocket);
     socket?.on("/status-list", handleUserStatus);
     socket?.on("/chat/message", handleChatMessage);
+
+    return () => {
+      socket?.off("connect", handleConnectSocket);
+      socket?.off("/status-list", handleUserStatus);
+      socket?.off("/chat/message", handleChatMessage);
+    };
   }, [socket, handleConnectSocket, handleUserStatus, handleChatMessage]);
 
   return (
@@ -185,70 +172,17 @@ const IndexPage = () => {
         <ChatBox column>
           <ChatBoxContainer ref={containerRef} auto column alignItems="flex-end">
             {viewChatHistoryList.map((group, groupIndex) => (
-              <ChatBoxGroup
-                key={groupIndex}
-                gap="8px"
-                column={group.user?.id === userId ? true : false}
-                alignItems={group.user?.id === userId ? "flex-end" : "flex-start"}
-              >
-                {group.user?.id === userId ? (
-                  group.historyList.map((history) => (
-                    // 나
-                    <Flex
-                      key={history.id}
-                      gap="4px"
-                      alignItems="flex-end"
-                      justifyContent="flex-end"
-                      style={{ width: "100%" }}
-                    >
-                      <ChatBoxContentTime>{dayjs(history.createdAt).format("HH:mm:ss")}</ChatBoxContentTime>
-                      <ChatBoxContent style={{ backgroundColor: "#ffd61e" }}>
-                        {history.type === "TEXT" ? (
-                          history.message
-                        ) : (
-                          <img src={history.message} width={200} height="auto" />
-                        )}
-                      </ChatBoxContent>
-                    </Flex>
-                  ))
-                ) : (
-                  // 상대방
-                  <>
-                    <ChatBoxProfile alignItems="center" justifyContent="center">
-                      {group.user?.nickname[0] || "-"}
-                    </ChatBoxProfile>
-
-                    <Flex auto column gap="8px" alignItems="flex-start">
-                      <ChatBoxProfileName>{group.user?.nickname || "(알수 없음)"}</ChatBoxProfileName>
-
-                      {group.historyList.map((history) => (
-                        <Flex key={history.id} gap="4px" alignItems="flex-end" style={{ width: "100%" }}>
-                          <ChatBoxContent>
-                            {history.type === "TEXT" ? (
-                              history.message
-                            ) : (
-                              <img src={history.message} width={200} height="auto" />
-                            )}
-                          </ChatBoxContent>
-                          <ChatBoxContentTime>{dayjs(history.createdAt).format("HH:mm:ss")}</ChatBoxContentTime>
-                        </Flex>
-                      ))}
-                    </Flex>
-                  </>
-                )}
-              </ChatBoxGroup>
+              <ChatTextGroup key={`chat-text-group-${groupIndex}`} data={group} />
             ))}
           </ChatBoxContainer>
 
-          {userId !== -1 && (
-            <ChatBoxTextarea
-              rows={4}
-              value={message}
-              onChange={handleChangeTextarea}
-              onPaste={handlePasteTextarea}
-              onKeyDown={handleKeydownTextarea}
-            />
-          )}
+          <ChatBoxTextarea
+            rows={4}
+            value={message}
+            onChange={handleChangeTextarea}
+            onPaste={handlePasteTextarea}
+            onKeyDown={handleKeydownTextarea}
+          />
         </ChatBox>
 
         <ChatBoxLogoutButton onClick={handleClickLogoutButton}>로그아웃</ChatBoxLogoutButton>
